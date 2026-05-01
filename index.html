@@ -143,7 +143,7 @@
       </div>
       <div class="bg-white rounded-2xl shadow-sm border-2 border-sky-200 p-4 sm:p-6">
         <h2 class="text-base font-semibold text-sky-900 mb-3 flex items-center gap-2">
-          <span>🫁</span> 肺炎風險
+          <span>🩺</span> 肺炎風險
         </h2>
         <div id="pnContent" class="text-sm text-slate-700 space-y-2"></div>
       </div>
@@ -414,32 +414,45 @@ function cvText(acb) {
           <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
 }
 
+// Capped pneumonia risk: 1.25 per point up to ACB 5 (paper main analysis),
+// then dampened to 1.03 per point above 5 (extrapolation matched to CV's
+// ≥5 → ≥10 gradient of 2.5x → 2.9x in BMJ 2023).
+function pnCumOR(points) {
+  if (points <= 0) return 1;
+  if (points <= 5) return Math.pow(1.25, points);
+  return Math.pow(1.25, 5) * Math.pow(1.03, points - 5);
+}
+
 function pnText(drugList) {
   const totalPts = drugList.reduce((s,d) => s + d.ACB, 0);
   if (totalPts === 0) {
     return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,肺炎風險未升高。</p>`;
   }
-  const PER = 1.25;
-  const totalOR = Math.pow(PER, totalPts);
+  const totalOR = pnCumOR(totalPts);
   const contributors = drugList.filter(d => d.ACB > 0);
   let cum = 0;
   const stepsHtml = contributors.map((d, i) => {
+    const beforeOR = pnCumOR(cum);
     cum += d.ACB;
-    const step = Math.pow(PER, d.ACB);
-    const running = Math.pow(PER, cum);
-    const pct = Math.round((step - 1) * 100);
+    const afterOR = pnCumOR(cum);
+    const stepRatio = afterOR / beforeOR;
+    const pct = Math.round((stepRatio - 1) * 100);
     const verb = i === 0 ? "風險升高約" : "再升高約";
     return `<div class="cascade-row flex items-center justify-between gap-2 text-xs py-1">
       <span class="truncate text-slate-700 min-w-0">+ ${d.name} <span class="text-slate-400">(ACB=${d.ACB})</span></span>
-      <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${running.toFixed(2)} 倍)</span></span>
+      <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${afterOR.toFixed(2)} 倍)</span></span>
     </div>`;
   }).join("");
+  const note = totalPts > 5
+    ? `<p class="text-xs text-amber-700 pt-1">註:ACB ≥6 部分為外推估計。原始研究主分析為每分 ×1.25;ACB 6 分以上參考心血管事件 ≥5 vs ≥10 之相對風險梯度(BMJ 2023),採每分 ×1.03 漸增。</p>`
+    : '';
   return `<p class="font-medium text-sky-700">累積肺炎風險 (ACB ${totalPts} 分)</p>
           <p class="text-sm text-slate-700">依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${totalOR.toFixed(2)} 倍</b>。</p>
           <div class="bg-slate-50 rounded-lg px-3 py-2 mt-1">
             <div class="text-xs text-slate-500 mb-1">逐步累加效應(基線:未服用抗膽鹼藥物):</div>
             ${stepsHtml}
           </div>
+          ${note}
           <p class="text-xs text-slate-400 pt-1">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>`;
 }
 
