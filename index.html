@@ -194,20 +194,21 @@
           <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
             <li>ACB 1–2 分:急性心血管事件風險 <b>增加約 38%</b>(相比 0 分)</li>
             <li>ACB ≥3 分:風險約為 <b>2 倍</b>(相比 0 分)</li>
-            <li>ACB ≥3 vs 1–2 分:風險再 <b>增加約 48%</b></li>
+            <li>ACB ≥5 分:風險約為 <b>2.5 倍</b>(相比 0 分)</li>
+            <li>ACB ≥10 分:風險約為 <b>2.9 倍</b>(相比 0 分)</li>
             <li>心血管死亡:ACB ≥3 分風險約為 <b>2.4 倍</b></li>
           </ul>
           <p class="text-xs text-slate-400 mt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>
         </div>
         <div>
-          <p class="font-medium text-slate-800">住院型肺炎 (整體族群)</p>
-          <p class="mt-1">每多 1 分 ACB,住院肺炎風險約增加(各量表結果一致):</p>
+          <p class="font-medium text-slate-800">住院型肺炎 (Clin Epidemiol 2025)</p>
+          <p class="mt-1">≥65 歲族群,近期 30 天內,每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):</p>
           <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
             <li>ACB / ADS / GABS:約 <b>+25%</b></li>
             <li>m-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b></li>
           </ul>
           <p class="mt-1 text-slate-500">效應為相乘:N 分 ACB 風險約為未服用者的 1.25 的 N 次方倍 (例:3 分 ≈ 2 倍、5 分 ≈ 3 倍)。</p>
-          <p class="text-xs text-slate-400">Yang ASH et al, Supplementary Table 6</p>
+          <p class="text-xs text-slate-400 mt-1">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>
         </div>
       </div>
     </details>
@@ -222,7 +223,7 @@
 
   <footer class="mt-8 text-center text-xs text-slate-400">
     <p>Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc</p>
-    <p class="mt-1">Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796.</p>
+    <p class="mt-1">Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796</p>
   </footer>
 
 </div>
@@ -377,6 +378,27 @@ function cvText(acb) {
     return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,屬最低風險族群。</p>
             <p class="text-xs text-slate-500">維持低負擔可避免心血管事件風險上升。</p>`;
   }
+  if (acb >= 10) {
+    return `<p class="font-medium text-red-700">極高度抗膽鹼負擔 (ACB ≥10)</p>
+            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2.9 倍</b>。</p>
+            <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
+              <div>· ACB ≥10 vs 0:風險 <b>×2.9</b>(增加約 190%)</div>
+              <div>· ACB ≥5 vs 0:風險 ×2.5</div>
+              <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
+            </div>
+            <p class="text-xs text-slate-600">建議優先減量、停用非必要藥物,並密切監測心血管症狀。</p>
+            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+  }
+  if (acb >= 5) {
+    return `<p class="font-medium text-red-700">非常高度抗膽鹼負擔 (ACB ≥5)</p>
+            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2.5 倍</b>。</p>
+            <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
+              <div>· ACB ≥5 vs 0:風險 <b>×2.5</b>(增加約 146%)</div>
+              <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
+            </div>
+            <p class="text-xs text-slate-600">建議減量、換用低負擔同類藥物,或停用非必要藥物。</p>
+            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+  }
   if (acb >= 3) {
     return `<p class="font-medium text-red-700">高度抗膽鹼負擔 (ACB ≥3)</p>
             <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2 倍</b>。</p>
@@ -415,13 +437,13 @@ function pnText(drugList) {
       <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${running.toFixed(2)} 倍)</span></span>
     </div>`;
   }).join("");
-  return `<p class="font-medium text-sky-700">目前用藥使住院肺炎風險,約為未服用者的 <span class="text-lg">${totalOR.toFixed(2)} 倍</span></p>
+  return `<p class="font-medium text-sky-700">依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <span class="text-lg">${totalOR.toFixed(2)} 倍</span></p>
           <div class="bg-slate-50 rounded-lg px-3 py-2 mt-1">
             <div class="text-xs text-slate-500 mb-1">逐步累加效應(基線:未服用抗膽鹼藥物):</div>
             ${stepsHtml}
           </div>
           <p class="text-xs text-slate-600 pt-1">每多 1 分 ACB,住院肺炎風險約 <b>增加 25%</b>。</p>
-          <p class="text-xs text-slate-400">Yang et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796.</p>`;
+          <p class="text-xs text-slate-400">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>`;
 }
 
 function findSameClass(drugList) {
