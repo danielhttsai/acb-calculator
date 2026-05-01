@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抗膽鹼藥物負擔計算器 (ACB Calculator)</title>
+<style id="tailwind-static">
+*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.relative{position:relative}.z-10{z-index:10}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-2{margin-left:0.5rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.ml-1{margin-left:0.25rem}.mt-0\.5{margin-top:0.125rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-12{height:3rem}.max-h-72{max-height:18rem}.min-h-screen{min-height:100vh}.w-12{width:3rem}.w-full{width:100%}.min-w-0{min-width:0px}.max-w-5xl{max-width:64rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.cursor-pointer{cursor:pointer}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.items-start{align-items:flex-start}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.125rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.break-words{overflow-wrap:break-word}.rounded-2xl{border-radius:1rem}.rounded-xl{border-radius:0.75rem}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-t-2{border-top-width:2px}.border-l-2{border-left-width:2px}.border-dashed{border-style:dashed}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-purple-200{--tw-border-opacity:1;border-color:rgb(233 213 255 / var(--tw-border-opacity, 1))}.border-red-200{--tw-border-opacity:1;border-color:rgb(254 202 202 / var(--tw-border-opacity, 1))}.border-sky-200{--tw-border-opacity:1;border-color:rgb(186 230 253 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-amber-300{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-sky-100{--tw-bg-opacity:1;background-color:rgb(224 242 254 / var(--tw-bg-opacity, 1))}.bg-sky-50{--tw-bg-opacity:1;background-color:rgb(240 249 255 / var(--tw-bg-opacity, 1))}.p-10{padding:2.5rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.pl-2{padding-left:0.5rem}.pr-3{padding-right:0.75rem}.pl-3{padding-left:0.75rem}.pt-1{padding-top:0.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-5xl{font-size:3rem;line-height:1}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.tracking-tight{letter-spacing:-0.025em}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-purple-900{--tw-text-opacity:1;color:rgb(88 28 135 / var(--tw-text-opacity, 1))}.text-red-900{--tw-text-opacity:1;color:rgb(127 29 29 / var(--tw-text-opacity, 1))}.text-sky-900{--tw-text-opacity:1;color:rgb(12 74 110 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-sky-700{--tw-text-opacity:1;color:rgb(3 105 161 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.text-indigo-900{--tw-text-opacity:1;color:rgb(49 46 129 / var(--tw-text-opacity, 1))}.opacity-75{opacity:0.75}.opacity-80{opacity:0.8}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:text-red-600:hover{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-indigo-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(99 102 241 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:mb-6{margin-bottom:1.5rem}.sm\:mb-8{margin-bottom:2rem}.sm\:p-6{padding:1.5rem}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:py-8{padding-top:2rem;padding-bottom:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}
+</style>
+<style>
+  html, body { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif; }
+  .scale-pill { font-variant-numeric: tabular-nums; }
+  .fade-in { animation: fadeIn .25s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .suggestion-item:hover, .suggestion-item.active { background-color: #eef2ff; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  body { font-size: 16px; }
+  input { font-size: 16px; }
+
+  @media (max-width: 640px) {
+    .drug-table th, .drug-table td { padding-left: 4px !important; padding-right: 4px !important; font-size: 12px !important; }
+    .drug-table .drug-name { max-width: 40vw; }
+    .drug-table .drug-name > div { word-break: break-word; }
+    .drug-table .atc { display: none !important; }
+    .cascade-row { flex-wrap: wrap !important; }
+    .cascade-row > span { white-space: normal !important; min-width: 0; }
+    .mobile-tight { padding: 1rem !important; }
+    /* On mobile, keep suggestions in document flow so they aren't hidden by keyboard */
+    #suggestions { position: static !important; box-shadow: none !important; border-color: #cbd5e1 !important; }
+    .suggestion-item { padding-top: 14px !important; padding-bottom: 14px !important; }
+  }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+<noscript>
+  <div style="background:#fee2e2;color:#7f1d1d;padding:14px;text-align:center;font-size:14px;line-height:1.5;border-bottom:2px solid #fecaca;">
+    ⚠ 此頁面需要啟用 JavaScript<br>
+    請複製連結後以 <b>Safari</b> (iPhone) 或 <b>Chrome</b> (Android) 開啟
+  </div>
+</noscript>
+
+<div id="inAppWarn" style="display:none;background:#fef3c7;color:#78350f;padding:12px;text-align:center;font-size:13px;line-height:1.5;border-bottom:2px solid #fde68a;"></div>
+
+<div class="max-w-5xl mx-auto px-3 sm:px-4 py-5 sm:py-8">
+
+  <header class="mb-6 sm:mb-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">抗膽鹼藥物負擔計算器</h1>
+    <p class="text-xs sm:text-sm text-slate-500 mt-1">Anticholinergic Burden Calculator · 6 種評分量表整合分析</p>
+  </header>
+
+  <!-- Drug input section -->
+  <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+    <label class="block text-sm font-medium text-slate-700 mb-2">輸入病人藥物</label>
+    <form id="drugForm" onsubmit="addFirstMatch(); return false;">
+      <div class="relative flex gap-2">
+        <input id="drugInput" type="search" list="drugDatalist"
+               autocomplete="off"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
+               inputmode="search"
+               enterkeyhint="go"
+               data-form-type="other"
+               oninput="runSearch()"
+               onkeyup="runSearch()"
+               placeholder="輸入藥名 (e.g. Quetiapine)"
+               class="flex-1 min-w-0 px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+        <button type="submit" onclick="addFirstMatch()"
+                class="px-5 py-3 bg-indigo-600 text-white rounded-xl font-medium whitespace-nowrap"
+                style="background:#4f46e5;color:#fff;">加入</button>
+      </div>
+      <datalist id="drugDatalist"></datalist>
+      <div id="suggestions" class="hidden mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-72 overflow-y-auto"></div>
+    </form>
+    <p class="text-xs text-slate-400 mt-2">輸入藥名 → 點「加入」按鈕 (或從建議中選)</p>
+  </section>
+
+  <!-- Selected drugs -->
+  <section id="selectedSection" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6 hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold text-slate-900">已選藥物 <span id="drugCount" class="text-slate-400 font-normal text-sm"></span></h2>
+      <button id="clearAll" class="text-sm text-slate-500 hover:text-red-600 transition">清除全部</button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="drug-table w-full text-sm">
+        <thead>
+          <tr class="text-left text-slate-500 border-b border-slate-200">
+            <th class="py-2 pr-3 font-medium">藥名</th>
+            <th class="py-2 px-2 font-medium text-center">ACB</th>
+            <th class="py-2 px-2 font-medium text-center">ADS</th>
+            <th class="py-2 px-2 font-medium text-center">GABS</th>
+            <th class="py-2 px-2 font-medium text-center">mACB</th>
+            <th class="py-2 px-2 font-medium text-center">KABS</th>
+            <th class="py-2 px-2 font-medium text-center">ARS</th>
+            <th class="py-2 pl-2 font-medium"></th>
+          </tr>
+        </thead>
+        <tbody id="selectedDrugs"></tbody>
+        <tfoot>
+          <tr class="border-t-2 border-slate-300 font-semibold bg-slate-50">
+            <td class="py-3 pr-3">總分 (Total)</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-ACB">0</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-ADS">0</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-GABS">0</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-mACB">0</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-KABS">0</td>
+            <td class="py-3 px-2 text-center scale-pill" id="total-ARS">0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- Results & Recommendations -->
+  <section id="resultsSection" class="hidden">
+
+    <!-- Risk level card -->
+    <div id="riskCard" class="rounded-2xl shadow-sm border p-4 sm:p-6 mb-4 sm:mb-6 transition">
+      <div class="flex items-start gap-4">
+        <div id="riskIcon" class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline gap-3">
+            <h2 class="text-lg font-semibold" id="riskTitle"></h2>
+            <span class="text-sm" id="riskScoreLabel"></span>
+          </div>
+          <p class="text-sm mt-1" id="riskSubtitle"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-up: Cardiovascular & Pneumonia -->
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-white rounded-2xl shadow-sm border-2 border-red-200 p-4 sm:p-6">
+        <h2 class="text-base font-semibold text-red-900 mb-3 flex items-center gap-2">
+          <span>❤️</span> 心血管事件風險
+        </h2>
+        <div id="cvContent" class="text-sm text-slate-700 space-y-2"></div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border-2 border-sky-200 p-4 sm:p-6">
+        <h2 class="text-base font-semibold text-sky-900 mb-3 flex items-center gap-2">
+          <span>🫁</span> 肺炎風險
+        </h2>
+        <div id="pnContent" class="text-sm text-slate-700 space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- Asian-scale divergence warning -->
+    <div id="asianScaleCard" class="hidden bg-purple-50 rounded-2xl border-2 border-purple-200 p-4 sm:p-6 mb-4 sm:mb-6">
+      <h2 class="text-base font-semibold text-purple-900 mb-3 flex items-center gap-2">
+        <span>🌏</span> 亞洲族群量表分數偏高
+      </h2>
+      <div id="asianScaleContent" class="text-sm text-purple-900 space-y-2"></div>
+    </div>
+
+    <!-- Same-class warning -->
+    <div id="sameClassCard" class="hidden bg-amber-50 rounded-2xl border-2 border-amber-200 p-4 sm:p-6 mb-4 sm:mb-6">
+      <h2 class="text-base font-semibold text-amber-900 mb-3 flex items-center gap-2">
+        <span>⚠️</span> 同類藥物重複用藥提醒
+      </h2>
+      <div id="sameClassContent" class="text-sm text-amber-900 space-y-3"></div>
+    </div>
+
+    <!-- Per-drug alternatives -->
+    <div id="drugAltsCard" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+      <h2 class="text-base font-semibold text-slate-900 mb-3 flex items-center gap-2">
+        <span>💊</span> 高負擔藥物替代建議
+      </h2>
+      <div id="drugAltsContent" class="space-y-3 text-sm text-slate-700"></div>
+    </div>
+
+    <!-- Monitoring -->
+    <div id="monitorCard" class="hidden bg-slate-50 rounded-2xl border border-slate-200 p-5 mb-6">
+      <h2 class="text-sm font-semibold text-slate-700 mb-1 flex items-center gap-2">
+        <span>📅</span> 監測建議
+      </h2>
+      <p class="text-xs text-slate-600">近期 (30 天內) 新增或加量抗膽鹼藥物為高風險時段。優先觀察:心悸、胸痛、暈厥、新發呼吸道症狀、認知變化。</p>
+    </div>
+
+    <!-- Evidence -->
+    <details class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+      <summary class="font-semibold text-slate-900 flex items-center justify-between">
+        <span class="flex items-center gap-2"><span class="text-indigo-600">📖</span> 文獻證據摘要</span>
+        <span class="text-slate-400 text-sm">展開</span>
+      </summary>
+      <div class="mt-4 space-y-4 text-sm text-slate-600">
+        <div>
+          <p class="font-medium text-slate-800">急性心血管事件 (BMJ 2023)</p>
+          <p class="mt-1">≥65 歲族群,近期 30 天內 ACB 升高與心肌梗塞、中風、心律不整、心血管死亡相關 (case-case-time-control 分析):</p>
+          <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
+            <li>ACB 1–2 分:急性心血管事件風險 <b>增加約 38%</b>(相比 0 分)</li>
+            <li>ACB ≥3 分:風險約為 <b>2 倍</b>(相比 0 分)</li>
+            <li>ACB ≥3 vs 1–2 分:風險再 <b>增加約 48%</b></li>
+            <li>心血管死亡:ACB ≥3 分風險約為 <b>2.4 倍</b></li>
+          </ul>
+          <p class="text-xs text-slate-400 mt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>
+        </div>
+        <div>
+          <p class="font-medium text-slate-800">住院型肺炎 (整體族群)</p>
+          <p class="mt-1">每多 1 分 ACB,住院肺炎風險約增加(各量表結果一致):</p>
+          <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
+            <li>ACB / ADS / GABS:約 <b>+25%</b></li>
+            <li>m-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b></li>
+          </ul>
+          <p class="mt-1 text-slate-500">效應為相乘:N 分 ACB 風險約為未服用者的 1.25 的 N 次方倍 (例:3 分 ≈ 2 倍、5 分 ≈ 3 倍)。</p>
+          <p class="text-xs text-slate-400">Yang ASH et al, Supplementary Table 6</p>
+        </div>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- Empty state -->
+  <section id="emptyState" class="bg-white rounded-2xl shadow-sm border border-dashed border-slate-300 p-10 text-center">
+    <div class="text-5xl mb-3">💊</div>
+    <p class="text-slate-500">輸入病人目前用藥開始計算抗膽鹼負擔</p>
+  </section>
+
+  <footer class="mt-8 text-center text-xs text-slate-400">
+    <p>Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc</p>
+    <p class="mt-1">Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796.</p>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  var ua = navigator.userAgent || "";
+  var inApp = /Line\/|FBAN|FBAV|FB_IAB|Instagram|MicroMessenger|WeChat|MQQBrowser|TikTok|Twitter/i.test(ua);
+  if (inApp) {
+    var w = document.getElementById("inAppWarn");
+    if (w) {
+      w.style.display = "block";
+      w.innerHTML = "⚠ 偵測到 in-app 瀏覽器(LINE/FB/IG 等),功能可能受限<br>請點右上角「⋯」選單 → <b>「以瀏覽器/Safari 開啟」</b>";
+    }
+  }
+})();
+const DRUGS = [{"name":"Oxethazaine","atc":"A02AX","ADS":3,"ACB":3,"GABS":0,"mACB":3,"KABS":3,"ARS":0},{"name":"Ranitidine","atc":"A02BA02","ADS":2,"ACB":1,"GABS":2,"mACB":1,"KABS":1,"ARS":1},{"name":"Famotidine","atc":"A02BA03","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Glycopyrrolate","atc":"A03AB02","ADS":0,"ACB":0,"GABS":1,"mACB":3,"KABS":2,"ARS":0},{"name":"Otilonium","atc":"A03AB06","ADS":0,"ACB":0,"GABS":0,"mACB":3,"KABS":3,"ARS":0},{"name":"Atropine","atc":"A03BA01","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":3},{"name":"Hyoscine Butylbromide","atc":"A03BB01","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Metoclopramide","atc":"A03FA01","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":1},{"name":"Domperidone","atc":"A03FA03","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Loperamide","atc":"A07DA03","ADS":1,"ACB":1,"GABS":2,"mACB":1,"KABS":1,"ARS":2},{"name":"Warfarin","atc":"B01AA03","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Dipyridamole","atc":"B01AC07","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Isosorbide","atc":"B05BC","ADS":1,"ACB":1,"GABS":0,"mACB":1,"KABS":0,"ARS":0},{"name":"Multivitamin","atc":"B05XC","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Digoxin","atc":"C01AA05","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Quinidine","atc":"C01BA01","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Isosorbide Dinitrate","atc":"C01DA08","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Isosorbide Mononitrate","atc":"C01DA14","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Doxazosin","atc":"C02CA04","ADS":0,"ACB":0,"GABS":0,"mACB":1,"KABS":0,"ARS":0},{"name":"Hydralazine","atc":"C02DB02","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Furosemide","atc":"C03CA01","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Metoprolol","atc":"C07AB02","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Atenolol","atc":"C07AB03","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Nifedipine","atc":"C08CA05","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Diltiazem","atc":"C08DB01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Captopril","atc":"C09AA01","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":0,"ARS":0},{"name":"Bromocriptine","atc":"G02CB01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Pipoxolan","atc":"G04BD","ADS":0,"ACB":0,"GABS":0,"mACB":3,"KABS":0,"ARS":0},{"name":"Oxybutynin","atc":"G04BD04","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":3},{"name":"Tolterodine","atc":"G04BD07","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":2},{"name":"Solifenacin","atc":"G04BD08","ADS":0,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Dexamethasone","atc":"H02AB02","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Methylprednisolone","atc":"H02AB04","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Prednisolone","atc":"H02AB06","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Triamcinolone","atc":"H02AB08","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Hydrocortisone","atc":"H02AB09","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Cortisone","atc":"H02AB10","ADS":1,"ACB":0,"GABS":0,"mACB":0,"KABS":0,"ARS":0},{"name":"Ampicillin","atc":"J01CA01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Piperacillin","atc":"J01CA12","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Piperacillin/Tazobactam","atc":"J01CR05","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Cefoxitin","atc":"J01DC01","ADS":1,"ACB":0,"GABS":0,"mACB":0,"KABS":0,"ARS":0},{"name":"Clindamycin","atc":"J01FF01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Gentamicin","atc":"J01GB03","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Vancomycin","atc":"J01XA01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Cycloserine","atc":"J04AB01","ADS":1,"ACB":0,"GABS":0,"mACB":0,"KABS":0,"ARS":0},{"name":"Voclosporin","atc":"L04AD01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Azathioprine","atc":"L04AX01","ADS":1,"ACB":0,"GABS":0,"mACB":0,"KABS":0,"ARS":0},{"name":"Etoricoxib","atc":"M01AH05","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Baclofen","atc":"M03BX01","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":2},{"name":"Tizanidine","atc":"M03BX02","ADS":0,"ACB":0,"GABS":3,"mACB":2,"KABS":2,"ARS":3},{"name":"Cyclobenzaprine","atc":"M03BX08","ADS":2,"ACB":2,"GABS":0,"mACB":2,"KABS":2,"ARS":2},{"name":"Colchicine","atc":"M04AC01","ADS":0,"ACB":1,"GABS":0,"mACB":1,"KABS":0,"ARS":0},{"name":"Fentanyl","atc":"N01AH01","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Morphine Sulfate","atc":"N02AA01","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Oxycodone","atc":"N02AA05","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Meperidine","atc":"N02AB02","ADS":2,"ACB":2,"GABS":2,"mACB":2,"KABS":2,"ARS":0},{"name":"Fentanyl (buccal)","atc":"N02AB03","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Tramadol","atc":"N02AX02","ADS":1,"ACB":0,"GABS":2,"mACB":0,"KABS":2,"ARS":0},{"name":"Nefopam","atc":"N02BG06","ADS":0,"ACB":2,"GABS":0,"mACB":2,"KABS":2,"ARS":0},{"name":"Clonazepam","atc":"N03AE01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Carbamazepine","atc":"N03AF01","ADS":2,"ACB":2,"GABS":2,"mACB":2,"KABS":1,"ARS":0},{"name":"Oxcarbazepine","atc":"N03AF02","ADS":2,"ACB":2,"GABS":2,"mACB":2,"KABS":2,"ARS":0},{"name":"Valproic Acid","atc":"N03AG01","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Trihexyphenidyl","atc":"N04AA01","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Biperiden","atc":"N04AA02","ADS":0,"ACB":0,"GABS":0,"mACB":3,"KABS":3,"ARS":0},{"name":"Amantadine","atc":"N04BB01","ADS":1,"ACB":2,"GABS":2,"mACB":2,"KABS":2,"ARS":2},{"name":"Pramipexole","atc":"N04BC05","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":1},{"name":"Rotigotine","atc":"N04BC09","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Rasagiline","atc":"N04BD02","ADS":0,"ACB":0,"GABS":0,"mACB":1,"KABS":0,"ARS":0},{"name":"Entacapone","atc":"N04BX02","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":1},{"name":"Chlorpromazine","atc":"N05AA01","ADS":3,"ACB":3,"GABS":0,"mACB":3,"KABS":3,"ARS":3},{"name":"Prochlorperazine","atc":"N05AB04","ADS":1,"ACB":0,"GABS":0,"mACB":1,"KABS":0,"ARS":2},{"name":"Trifluoperazine","atc":"N05AB06","ADS":1,"ACB":3,"GABS":0,"mACB":3,"KABS":0,"ARS":3},{"name":"Haloperidol","atc":"N05AD01","ADS":0,"ACB":1,"GABS":2,"mACB":1,"KABS":1,"ARS":1},{"name":"Ziprasidone","atc":"N05AE04","ADS":0,"ACB":0,"GABS":1,"mACB":1,"KABS":1,"ARS":1},{"name":"Flupentixol","atc":"N05AF01","ADS":0,"ACB":0,"GABS":0,"mACB":1,"KABS":1,"ARS":0},{"name":"Clozapine","atc":"N05AH02","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":2},{"name":"Olanzapine","atc":"N05AH03","ADS":1,"ACB":3,"GABS":2,"mACB":3,"KABS":3,"ARS":2},{"name":"Quetiapine","atc":"N05AH04","ADS":0,"ACB":3,"GABS":2,"mACB":3,"KABS":2,"ARS":1},{"name":"Sulpiride","atc":"N05AL01","ADS":0,"ACB":0,"GABS":0,"mACB":1,"KABS":0,"ARS":0},{"name":"Amisulpride","atc":"N05AL05","ADS":0,"ACB":0,"GABS":0,"mACB":1,"KABS":1,"ARS":0},{"name":"Lithium Carbonate","atc":"N05AN01","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Risperidone","atc":"N05AX08","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":1},{"name":"Zotepine","atc":"N05AX11","ADS":0,"ACB":0,"GABS":0,"mACB":2,"KABS":2,"ARS":0},{"name":"Aripiprazole","atc":"N05AX12","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Paliperidone","atc":"N05AX13","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Diazepam","atc":"N05BA01","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Chlordiazepoxide","atc":"N05BA02","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Lorazepam","atc":"N05BA06","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Alprazolam","atc":"N05BA12","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Hydroxyzine","atc":"N05BB01","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":3},{"name":"Flunitrazepam","atc":"N05CD03","ADS":0,"ACB":0,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Estazolam","atc":"N05CD04","ADS":1,"ACB":0,"GABS":0,"mACB":1,"KABS":1,"ARS":0},{"name":"Midazolam","atc":"N05CD08","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Imipramine","atc":"N06AA02","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":3},{"name":"Clomipramine","atc":"N06AA04","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Doxepin","atc":"N06AA12","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Maprotiline","atc":"N06AA21","ADS":0,"ACB":0,"GABS":2,"mACB":2,"KABS":0,"ARS":0},{"name":"Fluoxetine","atc":"N06AB03","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":1,"ARS":0},{"name":"Paroxetine","atc":"N06AB05","ADS":1,"ACB":3,"GABS":2,"mACB":3,"KABS":2,"ARS":1},{"name":"Sertraline","atc":"N06AB06","ADS":1,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Escitalopram","atc":"N06AB10","ADS":0,"ACB":0,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Trazodone","atc":"N06AX05","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":1},{"name":"Mirtazapine","atc":"N06AX11","ADS":0,"ACB":0,"GABS":1,"mACB":1,"KABS":1,"ARS":1},{"name":"Bupropion","atc":"N06AX12","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Venlafaxine","atc":"N06AX16","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Pseudoephedrine","atc":"R01BA02","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Indacaterol","atc":"R03AL04","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Tiotropium","atc":"R03AL06","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Ipratropium","atc":"R03BB01","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Tiotropium (R03BB04)","atc":"R03BB04","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Theophylline","atc":"R03DA04","ADS":1,"ACB":1,"GABS":2,"mACB":1,"KABS":1,"ARS":0},{"name":"Codeine","atc":"R05DA04","ADS":1,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Cough Mixture","atc":"R05FA02","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Diphenhydramine","atc":"R06AA02","ADS":3,"ACB":3,"GABS":3,"mACB":3,"KABS":3,"ARS":0},{"name":"Meclizine","atc":"R06AE05","ADS":3,"ACB":3,"GABS":0,"mACB":3,"KABS":3,"ARS":3},{"name":"Levocetirizine","atc":"R06AE09","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0},{"name":"Cyproheptadine","atc":"R06AX02","ADS":2,"ACB":2,"GABS":3,"mACB":2,"KABS":2,"ARS":3},{"name":"Loratadine","atc":"R06AX13","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":2},{"name":"Ketotifen","atc":"R06AX17","ADS":1,"ACB":0,"GABS":0,"mACB":1,"KABS":1,"ARS":0},{"name":"Fexofenadine","atc":"R06AX26","ADS":0,"ACB":0,"GABS":1,"mACB":0,"KABS":0,"ARS":0},{"name":"Desloratadine","atc":"R06AX27","ADS":0,"ACB":1,"GABS":1,"mACB":1,"KABS":1,"ARS":0}];
+
+const SCALES = ["ACB","ADS","GABS","mACB","KABS","ARS"];
+const selected = [];
+let activeIdx = -1;
+let currentSugg = [];
+
+const $ = id => document.getElementById(id);
+const drugInput = $("drugInput");
+const sugBox = $("suggestions");
+
+function search(q) {
+  if (!q.trim()) return [];
+  const s = q.trim().toLowerCase();
+  return DRUGS
+    .map(d => {
+      const n = d.name.toLowerCase();
+      let score = 0;
+      if (n === s) score = 100;
+      else if (n.startsWith(s)) score = 50;
+      else if (n.includes(s)) score = 20;
+      else if (d.atc.toLowerCase().includes(s)) score = 10;
+      return score ? { ...d, score } : null;
+    })
+    .filter(Boolean)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 10);
+}
+
+function renderSuggestions() {
+  if (!currentSugg.length) { sugBox.classList.add("hidden"); return; }
+  sugBox.innerHTML = currentSugg.map((d, i) => {
+    const maxScore = Math.max(d.ACB, d.ADS, d.GABS, d.mACB, d.KABS, d.ARS);
+    const colorClass = maxScore >= 3 ? "text-red-600" : maxScore >= 1 ? "text-amber-600" : "text-slate-400";
+    return `<div class="suggestion-item px-4 py-2 cursor-pointer flex justify-between items-center ${i===activeIdx?'active':''}" data-idx="${i}">
+      <div>
+        <div class="font-medium text-slate-800">${d.name}</div>
+        <div class="text-xs text-slate-400">${d.atc}</div>
+      </div>
+      <div class="text-xs ${colorClass} font-medium">ACB ${d.ACB}</div>
+    </div>`;
+  }).join("");
+  sugBox.classList.remove("hidden");
+  sugBox.querySelectorAll(".suggestion-item").forEach(el => {
+    el.addEventListener("click", () => addDrug(currentSugg[+el.dataset.idx]));
+  });
+}
+
+function addDrug(d) {
+  selected.push(d);
+  drugInput.value = "";
+  currentSugg = [];
+  activeIdx = -1;
+  sugBox.classList.add("hidden");
+  render();
+  drugInput.focus();
+}
+
+function removeDrug(idx) {
+  selected.splice(idx, 1);
+  render();
+}
+
+function totals() {
+  const t = { ACB:0, ADS:0, GABS:0, mACB:0, KABS:0, ARS:0 };
+  selected.forEach(d => SCALES.forEach(s => t[s] += d[s]));
+  return t;
+}
+
+function classify(acb) {
+  if (acb === 0) return { level:"low", label:"低風險", emoji:"✓", desc:"目前無抗膽鹼藥物負擔", bg:"bg-emerald-50", border:"border-emerald-200", iconBg:"bg-emerald-100 text-emerald-700", text:"text-emerald-900" };
+  if (acb <= 2) return { level:"mid", label:"中度風險 (1–2 分)", emoji:"!", desc:"建議檢視是否有可替代之低抗膽鹼藥物", bg:"bg-amber-50", border:"border-amber-200", iconBg:"bg-amber-100 text-amber-700", text:"text-amber-900" };
+  return { level:"high", label:"高風險 (≥3 分)", emoji:"⚠", desc:"心血管事件、肺炎風險明顯升高;建議優先減量或更換用藥", bg:"bg-red-50", border:"border-red-200", iconBg:"bg-red-100 text-red-700", text:"text-red-900" };
+}
+
+const ATC_CLASS = {
+  "A02BA": "H2 受體拮抗劑",
+  "A03AB": "腸道解痙劑 (季銨)",
+  "A03BA": "Belladonna alkaloid",
+  "A03BB": "Belladonna alkaloid 衍生物",
+  "A03FA": "Propulsives (止吐/促腸蠕動)",
+  "B01AC": "抗血小板",
+  "C01DA": "硝酸鹽類",
+  "C07AB": "選擇性 β-blocker",
+  "G04BD": "膀胱解痙劑 (anti-muscarinic)",
+  "H02AB": "Glucocorticoid",
+  "M03BX": "中樞性肌肉鬆弛劑",
+  "N02AA": "天然鴉片類鎮痛劑",
+  "N02AB": "Phenylpiperidine 鴉片類",
+  "N03AF": "Carboxamide 抗癲癇",
+  "N04AA": "抗膽鹼類抗 Parkinson 藥",
+  "N04BC": "Dopamine agonist",
+  "N05AA": "Phenothiazine (aliphatic) 抗精神病藥",
+  "N05AB": "Phenothiazine (piperazine) 抗精神病藥",
+  "N05AH": "非典型抗精神病藥 (diazepines/thiepines)",
+  "N05AL": "Benzamide 抗精神病藥",
+  "N05AX": "其他抗精神病藥",
+  "N05BA": "Benzodiazepine 抗焦慮藥",
+  "N05CD": "Benzodiazepine 安眠藥",
+  "N06AA": "三環抗憂鬱劑 (TCA)",
+  "N06AB": "選擇性血清素再回收抑制劑 (SSRI)",
+  "N06AX": "其他抗憂鬱藥",
+  "R03AL": "支氣管擴張劑 (β2+anti-muscarinic)",
+  "R03BB": "吸入性抗膽鹼支氣管擴張劑",
+  "R06AA": "Aminoalkyl ether 抗組織胺 (1st gen)",
+  "R06AE": "Piperazine 衍生物 (抗組織胺)",
+  "R06AX": "其他全身性抗組織胺",
+};
+
+const ALTERNATIVES = {
+  "Oxethazaine": "GI 局部麻醉劑,通常為短期使用,建議評估停用",
+  "Atropine": "急救或特定適應症使用,通常為必要藥物",
+  "Hyoscine Butylbromide": "本資料庫內無低負擔同類腸道解痙劑可替代",
+  "Multivitamin": "確認成分必要性,非治療必要可停用",
+  "Oxybutynin": "本資料庫內同類 (Tolterodine、Solifenacin) 皆 ACB=3;臨床可考慮 β3-agonist (Mirabegron,本資料庫未收錄)",
+  "Tolterodine": "本資料庫內同類 (Oxybutynin、Solifenacin) 皆 ACB=3;臨床可考慮 β3-agonist (Mirabegron)",
+  "Solifenacin": "本資料庫內同類 (Oxybutynin、Tolterodine) 皆 ACB=3;臨床可考慮 β3-agonist (Mirabegron)",
+  "Trihexyphenidyl": "Parkinsonism 之抗膽鹼類用藥,本資料庫內無低負擔同類替代 (Biperiden mACB=3)",
+  "Chlorpromazine": "本資料庫內無較低負擔之 typical antipsychotic;若臨床可,改 atypical 之 Aripiprazole / Risperidone / Paliperidone (ACB=1) 為較低負擔",
+  "Trifluoperazine": "本資料庫內無較低負擔之 typical antipsychotic;若臨床可,改 atypical 之 Aripiprazole / Risperidone / Paliperidone (ACB=1) 為較低負擔",
+  "Clozapine": "Treatment-resistant 適應症,通常無法直接替換",
+  "Olanzapine": "同 atypical antipsychotic 中,Aripiprazole / Risperidone / Paliperidone (ACB=1) 為較低負擔",
+  "Quetiapine": "同 atypical antipsychotic 中,Aripiprazole / Risperidone / Paliperidone (ACB=1) 為較低負擔",
+  "Hydroxyzine": "若可,改 2nd gen H1 blocker:Fexofenadine (ACB=0),或 Loratadine / Desloratadine / Levocetirizine (ACB=1)",
+  "Imipramine": "同 TCA 類皆為 ACB=3;若適應症為憂鬱症,可改 SSRI:Sertraline / Fluoxetine / Escitalopram (ACB=0)",
+  "Clomipramine": "同 TCA 類皆為 ACB=3;若適應症為憂鬱症/OCD,可改 SSRI:Sertraline / Escitalopram (ACB=0)",
+  "Doxepin": "同 TCA 類皆為 ACB=3;若用於失眠,建議非藥物處置或低劑量;若為憂鬱症,可改 SSRI",
+  "Paroxetine": "同 SSRI 類中,Sertraline / Fluoxetine / Escitalopram (ACB=0) 為較低負擔",
+  "Cough Mixture": "成分常含 1st gen 抗組織胺,評估更換配方或停用",
+  "Diphenhydramine": "改 2nd gen H1 blocker:Fexofenadine (ACB=0),或 Loratadine / Desloratadine (ACB=1)",
+  "Meclizine": "本資料庫內無低負擔同類 antivertigo / antihistamine 替代;評估減量或非藥物處置",
+};
+
+function cvText(acb) {
+  if (acb === 0) {
+    return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,屬最低風險族群。</p>
+            <p class="text-xs text-slate-500">維持低負擔可避免心血管事件風險上升。</p>`;
+  }
+  if (acb >= 3) {
+    return `<p class="font-medium text-red-700">高度抗膽鹼負擔 (ACB ≥3)</p>
+            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2 倍</b>。</p>
+            <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
+              <div>· 心血管死亡風險約 <b>2.4 倍</b></div>
+              <div>· 心肌梗塞風險約 <b>2.2 倍</b></div>
+              <div>· 心律不整風險約 <b>2.2 倍</b></div>
+              <div>· 缺血性中風風險約 <b>2 倍</b></div>
+            </div>
+            <p class="text-xs text-slate-600">建議減量、換用低負擔同類藥物,或停用非必要藥物。</p>
+            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+  }
+  return `<p class="font-medium text-amber-700">中度抗膽鹼負擔 (ACB 1–2)</p>
+          <p class="text-sm text-slate-700">30 天內急性心血管事件風險約 <b class="text-amber-700">增加 38%</b>(相比未服用)。</p>
+          <p class="text-xs text-slate-600">若臨床許可,建議降至 0 分。</p>
+          <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+}
+
+function pnText(drugList) {
+  const totalPts = drugList.reduce((s,d) => s + d.ACB, 0);
+  if (totalPts === 0) {
+    return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,肺炎風險未升高。</p>`;
+  }
+  const PER = 1.25;
+  const totalOR = Math.pow(PER, totalPts);
+  const contributors = drugList.filter(d => d.ACB > 0);
+  let cum = 0;
+  const stepsHtml = contributors.map((d, i) => {
+    cum += d.ACB;
+    const step = Math.pow(PER, d.ACB);
+    const running = Math.pow(PER, cum);
+    const pct = Math.round((step - 1) * 100);
+    const verb = i === 0 ? "風險升高約" : "再升高約";
+    return `<div class="cascade-row flex items-center justify-between gap-2 text-xs py-1">
+      <span class="truncate text-slate-700 min-w-0">+ ${d.name} <span class="text-slate-400">(ACB=${d.ACB})</span></span>
+      <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${running.toFixed(2)} 倍)</span></span>
+    </div>`;
+  }).join("");
+  return `<p class="font-medium text-sky-700">目前用藥使住院肺炎風險,約為未服用者的 <span class="text-lg">${totalOR.toFixed(2)} 倍</span></p>
+          <div class="bg-slate-50 rounded-lg px-3 py-2 mt-1">
+            <div class="text-xs text-slate-500 mb-1">逐步累加效應(基線:未服用抗膽鹼藥物):</div>
+            ${stepsHtml}
+          </div>
+          <p class="text-xs text-slate-600 pt-1">每多 1 分 ACB,住院肺炎風險約 <b>增加 25%</b>。</p>
+          <p class="text-xs text-slate-400">Yang et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796.</p>`;
+}
+
+function findSameClass(drugList) {
+  const groups = {};
+  drugList.forEach(d => {
+    const cls = d.atc.substring(0, 5);
+    if (!groups[cls]) groups[cls] = [];
+    groups[cls].push(d);
+  });
+  return Object.entries(groups)
+    .filter(([_, arr]) => arr.length >= 2)
+    .map(([cls, arr]) => ({ cls, drugs: arr }));
+}
+
+function render() {
+  const t = totals();
+  $("drugCount").textContent = selected.length ? `(${selected.length})` : "";
+  $("selectedSection").classList.toggle("hidden", !selected.length);
+  $("resultsSection").classList.toggle("hidden", !selected.length);
+  $("emptyState").classList.toggle("hidden", !!selected.length);
+
+  $("selectedDrugs").innerHTML = selected.map((d, i) => {
+    return `<tr class="border-b border-slate-100 fade-in">
+      <td class="py-2.5 pr-3 drug-name">
+        <div class="font-medium text-slate-800 break-words">${d.name}</div>
+        <div class="atc text-xs text-slate-400">${d.atc}</div>
+      </td>
+      ${SCALES.map(s => `<td class="py-2.5 px-2 text-center scale-pill ${d[s]>=3?'text-red-600 font-semibold':d[s]>=1?'text-amber-600':'text-slate-300'}">${d[s]}</td>`).join("")}
+      <td class="py-2.5 pl-2 text-right">
+        <button class="text-slate-400 hover:text-red-600 transition" data-rm="${i}" title="移除">✕</button>
+      </td>
+    </tr>`;
+  }).join("");
+  $("selectedDrugs").querySelectorAll("[data-rm]").forEach(b =>
+    b.addEventListener("click", () => removeDrug(+b.dataset.rm))
+  );
+
+  SCALES.forEach(s => $("total-"+s).textContent = t[s]);
+
+  if (!selected.length) return;
+
+  const c = classify(t.ACB);
+  const card = $("riskCard");
+  card.className = `rounded-2xl shadow-sm border p-4 sm:p-6 mb-4 sm:mb-6 transition ${c.bg} ${c.border}`;
+  $("riskIcon").className = `w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${c.iconBg}`;
+  $("riskIcon").textContent = c.emoji;
+  $("riskTitle").className = `text-lg font-semibold ${c.text}`;
+  $("riskTitle").textContent = c.label;
+  $("riskScoreLabel").className = `text-sm ${c.text} opacity-75`;
+  $("riskScoreLabel").textContent = `· ACB 總分 ${t.ACB}`;
+  $("riskSubtitle").className = `text-sm mt-1 ${c.text} opacity-80`;
+  $("riskSubtitle").textContent = c.desc;
+
+  $("cvContent").innerHTML = cvText(t.ACB);
+  $("pnContent").innerHTML = pnText(selected);
+
+  const THRESHOLD = 2;
+  const flagged = [];
+  if (t.mACB - t.ACB >= THRESHOLD) flagged.push({ scale:"m-ACB", val:t.mACB, diff:t.mACB - t.ACB });
+  if (t.KABS - t.ACB >= THRESHOLD) flagged.push({ scale:"KABS",  val:t.KABS, diff:t.KABS - t.ACB });
+  if (flagged.length) {
+    $("asianScaleCard").classList.remove("hidden");
+    const lines = flagged.map(f =>
+      `<div>· <b>${f.scale}</b> = ${f.val} 分(較 ACB ${t.ACB} 分多 <b>+${f.diff}</b> 分)</div>`
+    ).join("");
+    $("asianScaleContent").innerHTML = `
+      <p>m-ACB 與 KABS 是針對<b>亞洲族群</b>開發或修訂的量表,常涵蓋本地常用而 ACB 未列入的藥物 (如部分中樞性肌肉鬆弛劑、亞洲常用抗精神病藥)。</p>
+      ${lines}
+      <p class="text-xs">本病人在亞洲量表的分數明顯高於 ACB,代表 ACB 可能<b>低估</b>實際抗膽鹼負擔。建議:</p>
+      <ul class="text-xs list-disc list-inside ml-1 space-y-0.5 opacity-90">
+        <li>即使 ACB 看似中低度,仍應視同高負擔處理 (參照亞洲量表)</li>
+        <li>檢視造成差異的藥物 (常見:Tizanidine、Biperiden、Otilonium、Glycopyrrolate、Pipoxolan 等)</li>
+        <li>可考慮減量或換用低負擔同類藥物</li>
+      </ul>`;
+  } else {
+    $("asianScaleCard").classList.add("hidden");
+  }
+
+  const groups = findSameClass(selected);
+  if (groups.length) {
+    $("sameClassCard").classList.remove("hidden");
+    $("sameClassContent").innerHTML = groups.map(g => {
+      const className = ATC_CLASS[g.cls] || `ATC ${g.cls}`;
+      const names = g.drugs.map(d => `<b>${d.name}</b> (ACB=${d.ACB})`).join("、");
+      return `<div class="border-l-2 border-amber-300 pl-3">
+        <div class="font-medium">${className}</div>
+        <div class="text-sm">${names}</div>
+        <div class="text-xs opacity-80 mt-0.5">同類別合併使用會疊加抗膽鹼負擔且可能屬重複治療,建議檢視必要性與整併。</div>
+      </div>`;
+    }).join("");
+  } else {
+    $("sameClassCard").classList.add("hidden");
+  }
+
+  const high = selected.filter(d => d.ACB >= 3);
+  if (high.length) {
+    $("drugAltsCard").classList.remove("hidden");
+    $("drugAltsContent").innerHTML = high.map(d => {
+      const alt = ALTERNATIVES[d.name] || "本資料庫內無同類較低負擔藥物可建議";
+      return `<div class="border-l-2 border-indigo-200 pl-3">
+        <div class="font-medium text-slate-800">${d.name} <span class="text-xs text-red-600 ml-1">ACB=3</span></div>
+        <div class="text-xs text-slate-600 mt-0.5">${alt}</div>
+      </div>`;
+    }).join("");
+  } else {
+    $("drugAltsCard").classList.add("hidden");
+  }
+
+  $("monitorCard").classList.toggle("hidden", t.ACB === 0);
+}
+
+function runSearch() {
+  currentSugg = search(drugInput.value);
+  activeIdx = currentSugg.length ? 0 : -1;
+  renderSuggestions();
+}
+function addFirstMatch() {
+  runSearch();
+  if (currentSugg.length) addDrug(currentSugg[0]);
+  return false;
+}
+window.addFirstMatch = addFirstMatch;
+window.runSearch = runSearch;
+
+// Populate datalist with all drugs (native browser autocomplete; works without JS events)
+(function() {
+  const dl = document.getElementById('drugDatalist');
+  if (!dl) return;
+  dl.innerHTML = DRUGS.map(d => `<option value="${d.name}">${d.atc} · ACB ${d.ACB}</option>`).join('');
+})();
+drugInput.addEventListener("input", runSearch);
+drugInput.addEventListener("compositionend", runSearch);
+drugInput.addEventListener("change", runSearch);
+drugInput.addEventListener("focus", () => { if (drugInput.value.trim()) runSearch(); });
+
+// Polling fallback for restricted webviews (iOS QuickLook ZIP preview, some in-app browsers)
+// where 'input' events do not fire reliably
+let __lastInputValue = "";
+setInterval(function() {
+  if (drugInput && drugInput.value !== __lastInputValue) {
+    __lastInputValue = drugInput.value;
+    runSearch();
+  }
+}, 150);
+
+drugInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    if (currentSugg.length) addDrug(currentSugg[activeIdx >= 0 ? activeIdx : 0]);
+    else { runSearch(); if (currentSugg.length) addDrug(currentSugg[0]); }
+    return;
+  }
+  if (!currentSugg.length) return;
+  if (e.key === "ArrowDown") { e.preventDefault(); activeIdx = (activeIdx+1) % currentSugg.length; renderSuggestions(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); activeIdx = (activeIdx-1+currentSugg.length) % currentSugg.length; renderSuggestions(); }
+  else if (e.key === "Escape") { sugBox.classList.add("hidden"); }
+});
+
+document.addEventListener("click", e => {
+  if (!drugInput.contains(e.target) && !sugBox.contains(e.target)) sugBox.classList.add("hidden");
+});
+
+$("clearAll").addEventListener("click", () => { selected.length = 0; render(); });
+
+render();
+</script>
+</body>
+</html>
