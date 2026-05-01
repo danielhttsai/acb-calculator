@@ -202,7 +202,7 @@
         </div>
         <div>
           <p class="font-medium text-slate-800">住院型肺炎 (Clin Epidemiol 2025)</p>
-          <p class="mt-1">≥65 歲族群,近期 30 天內,每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):</p>
+          <p class="mt-1">≥65 歲族群,近期 30 天內每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):</p>
           <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
             <li>ACB / ADS / GABS:約 <b>+25%</b></li>
             <li>m-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b></li>
@@ -386,7 +386,6 @@ function cvText(acb) {
               <div>· ACB ≥5 vs 0:風險 ×2.5</div>
               <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
             </div>
-            <p class="text-xs text-slate-600">建議優先減量、停用非必要藥物,並密切監測心血管症狀。</p>
             <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
   }
   if (acb >= 5) {
@@ -396,7 +395,6 @@ function cvText(acb) {
               <div>· ACB ≥5 vs 0:風險 <b>×2.5</b>(增加約 146%)</div>
               <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
             </div>
-            <p class="text-xs text-slate-600">建議減量、換用低負擔同類藥物,或停用非必要藥物。</p>
             <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
   }
   if (acb >= 3) {
@@ -408,7 +406,6 @@ function cvText(acb) {
               <div>· 心律不整風險約 <b>2.2 倍</b></div>
               <div>· 缺血性中風風險約 <b>2 倍</b></div>
             </div>
-            <p class="text-xs text-slate-600">建議減量、換用低負擔同類藥物,或停用非必要藥物。</p>
             <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
   }
   return `<p class="font-medium text-amber-700">中度抗膽鹼負擔 (ACB 1–2)</p>
@@ -437,13 +434,13 @@ function pnText(drugList) {
       <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${running.toFixed(2)} 倍)</span></span>
     </div>`;
   }).join("");
-  return `<p class="font-medium text-sky-700">依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <span class="text-lg">${totalOR.toFixed(2)} 倍</span></p>
+  return `<p class="font-medium text-sky-700">累積肺炎風險 (ACB ${totalPts} 分)</p>
+          <p class="text-sm text-slate-700">依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${totalOR.toFixed(2)} 倍</b>。</p>
           <div class="bg-slate-50 rounded-lg px-3 py-2 mt-1">
             <div class="text-xs text-slate-500 mb-1">逐步累加效應(基線:未服用抗膽鹼藥物):</div>
             ${stepsHtml}
           </div>
-          <p class="text-xs text-slate-600 pt-1">每多 1 分 ACB,住院肺炎風險約 <b>增加 25%</b>。</p>
-          <p class="text-xs text-slate-400">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>`;
+          <p class="text-xs text-slate-400 pt-1">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>`;
 }
 
 function findSameClass(drugList) {
