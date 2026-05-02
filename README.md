@@ -10,14 +10,15 @@
 
 ## 功能
 
-- **6 種評分量表整合**:ACB · ADS · GABS · m-ACB · KABS · ARS
+- **6 種評分量表整合**:ACB · ADS · GABS · m-ACB · KABS · ARS(介面內附各量表發表年代、作者、適用族群與原始文獻引用)
 - **122 種台灣常見藥物資料庫**(來源:PHDc)
-- **心血管事件風險分級**(依 BMJ 2023 主分析與 sensitivity analysis):
+- **計算範圍說明**:外用劑型 (topical) 不計入;吸入劑 (inhaled) 仍計入(因有系統性吸收且與心血管事件相關),依 BMJ 2023 原始研究方法
+- **心血管事件風險分級**(依 BMJ 2023 主分析與 sensitivity analysis;**30 天內**急性心血管事件風險):
   - ACB 1–2 → ×1.4 倍
   - ACB ≥3 → ×2 倍(含 MI、stroke、arrhythmia、CV death 細項)
   - ACB ≥5 → ×2.5 倍
   - ACB ≥10 → ×2.9 倍
-- **肺炎風險逐步累加效應**(依 Clin Epidemiol 2025):
+- **肺炎風險逐步累加效應**(依 Clin Epidemiol 2025;**30 天內**急性住院肺炎風險):
   - ACB ≤5:每加 1 分 → 風險 ×1.25(原始研究主分析)
   - ACB ≥6:每加 1 分 → 風險 ×1.03(外推估計,梯度參考 BMJ 2023 心血管事件 ≥5 vs ≥10 之相對風險比)
   - 介面以累乘呈現逐藥增量,並於外推區間自動標註說明
@@ -31,6 +32,15 @@
 > Huang W-C, Yang A S-H, Tsai D H-T, Shao S-C, Lin S-J, Lai E C-C. **Association between recently raised anticholinergic burden and risk of acute cardiovascular events: nationwide case-case-time-control study.** *BMJ* 2023;382:e076045. doi:10.1136/bmj-2023-076045
 
 > Yang A S-H, Fan Chiang H-Y, Tsai D H-T, Chuang A T-M, Lai E C-C. **Association Between Pneumonia Risk and Anticholinergic Burden Among Patients with Different Frailty Levels.** *Clin Epidemiol.* 2025 Sep 30;17:787–796.
+
+### 評分量表原始文獻
+
+- **ACB** Boustani M, Campbell N, Munger S, Maidment I, Fox C. *Aging Health.* 2008;4(3):311–320.
+- **ADS** Carnahan RM, Lund BC, Perry PJ, Pollock BG, Culp KR. *J Clin Pharmacol.* 2006;46(12):1481–1486.
+- **GABS** Kiesel EK, Hopf YM, Drey M. *BMC Geriatr.* 2018;18(1):239.
+- **m-ACB** Ah YM, Suh Y, Jun K, Hwang S, Lee JY. *Basic Clin Pharmacol Toxicol.* 2019;124(6):741–748.
+- **KABS** Jun K, Hwang S, Ah YM, Suh Y, Lee JY. *Geriatr Gerontol Int.* 2019;19(7):628–634.
+- **ARS** Rudolph JL, Salow MJ, Angelini MC, McGlinchey RE. *Arch Intern Med.* 2008;168(5):508–513.
 
 ## 注意事項
 

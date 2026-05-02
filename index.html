@@ -85,6 +85,7 @@
       <div id="suggestions" class="hidden mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-72 overflow-y-auto"></div>
     </form>
     <p id="inputHintEl" class="text-xs text-slate-400 mt-2">輸入藥名 → 點「加入」按鈕 (或從建議中選)</p>
+    <p id="methodNoteEl" class="text-xs text-slate-500 mt-2 italic">外用劑型 (topical) 不計入;吸入劑 (inhaled) 仍計入(因有系統性吸收且與心血管事件相關)。</p>
   </section>
 
   <!-- Selected drugs -->
@@ -221,6 +222,22 @@
       </div>
     </details>
 
+    <!-- Scales intro -->
+    <details class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
+      <summary class="font-semibold text-slate-900 flex items-center justify-between">
+        <span class="flex items-center gap-2"><span class="text-indigo-600">📚</span> <span id="scalesIntroTitleEl">6 種抗膽鹼負擔量表簡介</span></span>
+        <span id="scalesIntroExpandEl" class="text-slate-400 text-sm">展開</span>
+      </summary>
+      <div class="mt-4 space-y-4 text-sm text-slate-600">
+        <div><p class="font-medium text-slate-800">ACB <span class="text-xs text-slate-500 font-normal">Anticholinergic Cognitive Burden Scale</span></p><p id="scaleAcbEl" class="mt-1">2008 年由 Boustani 等學者於美國發表,以 0–3 分評估藥物對認知功能之抗膽鹼影響,為目前國際間最廣為使用之量表,亦為 BMJ 2023 與 Clin Epidemiol 2025 主分析所採用。</p></div>
+        <div><p class="font-medium text-slate-800">ADS <span class="text-xs text-slate-500 font-normal">Anticholinergic Drug Scale</span></p><p id="scaleAdsEl" class="mt-1">2006 年由 Carnahan 等學者發表,以血清抗膽鹼活性 (serum anticholinergic activity, SAA) 為依據,評分 0–3,著重藥物對長期照護住民之認知與功能影響。</p></div>
+        <div><p class="font-medium text-slate-800">GABS <span class="text-xs text-slate-500 font-normal">German Anticholinergic Burden Scale</span></p><p id="scaleGabsEl" class="mt-1">2018 年由 Kiesel 等學者發表,專為德國處方藥開發,涵蓋較新近上市藥物,評分 0–3,適用於歐洲處方環境。</p></div>
+        <div><p class="font-medium text-slate-800">m-ACB <span class="text-xs text-slate-500 font-normal">Modified Anticholinergic Cognitive Burden</span></p><p id="scaleMacbEl" class="mt-1">2019 年由韓國 Ah 等學者修訂,在 ACB 基礎上加入亞洲常用之中樞性肌肉鬆弛劑、抗精神病藥等,評分 0–3,適用於東亞族群。</p></div>
+        <div><p class="font-medium text-slate-800">KABS <span class="text-xs text-slate-500 font-normal">Korean Anticholinergic Burden Scale</span></p><p id="scaleKabsEl" class="mt-1">2019 年由韓國 Jun 等學者開發,專為韓國老年族群設計,涵蓋韓國常用藥物,評分 0–3,亦適用於東亞族群。</p></div>
+        <div><p class="font-medium text-slate-800">ARS <span class="text-xs text-slate-500 font-normal">Anticholinergic Risk Scale</span></p><p id="scaleArsEl" class="mt-1">2008 年由美國 Rudolph 等學者發表,以「臨床顯著抗膽鹼副作用」為評分依據(0–3),較聚焦於可量測之臨床事件而非血清生化指標。</p></div>
+      </div>
+    </details>
+
   </section>
 
   <!-- Empty state -->
@@ -247,6 +264,14 @@ const I18N = {
     placeholder: "輸入藥名 (e.g. Quetiapine)",
     addBtn: "加入",
     inputHint: "輸入藥名 → 點「加入」按鈕 (或從建議中選)",
+    methodNote: "外用劑型 (topical) 不計入;吸入劑 (inhaled) 仍計入(因有系統性吸收且與心血管事件相關)。",
+    scalesIntroTitle: "6 種抗膽鹼負擔量表簡介",
+    scaleAcb: "2008 年由 Boustani 等學者於美國發表,以 0–3 分評估藥物對認知功能之抗膽鹼影響,為目前國際間最廣為使用之量表,亦為 BMJ 2023 與 Clin Epidemiol 2025 主分析所採用。<span class='block text-xs text-slate-400 mt-1'>Boustani M, Campbell N, Munger S, Maidment I, Fox C. <i>Aging Health</i>. 2008;4(3):311–320.</span>",
+    scaleAds: "2006 年由 Carnahan 等學者發表,以血清抗膽鹼活性 (serum anticholinergic activity, SAA) 為依據,評分 0–3,著重藥物對長期照護住民之認知與功能影響。<span class='block text-xs text-slate-400 mt-1'>Carnahan RM, Lund BC, Perry PJ, Pollock BG, Culp KR. <i>J Clin Pharmacol</i>. 2006;46(12):1481–1486.</span>",
+    scaleGabs: "2018 年由 Kiesel 等學者發表,專為德國處方藥開發,涵蓋較新近上市藥物,評分 0–3,適用於歐洲處方環境。<span class='block text-xs text-slate-400 mt-1'>Kiesel EK, Hopf YM, Drey M. <i>BMC Geriatr</i>. 2018;18(1):239.</span>",
+    scaleMacb: "2019 年由韓國 Ah 等學者修訂,在 ACB 基礎上加入亞洲常用之中樞性肌肉鬆弛劑、抗精神病藥等,評分 0–3,適用於東亞族群。<span class='block text-xs text-slate-400 mt-1'>Ah YM, Suh Y, Jun K, Hwang S, Lee JY. <i>Basic Clin Pharmacol Toxicol</i>. 2019;124(6):741–748.</span>",
+    scaleKabs: "2019 年由韓國 Jun 等學者開發,專為韓國老年族群設計,涵蓋韓國常用藥物,評分 0–3,亦適用於東亞族群。<span class='block text-xs text-slate-400 mt-1'>Jun K, Hwang S, Ah YM, Suh Y, Lee JY. <i>Geriatr Gerontol Int</i>. 2019;19(7):628–634.</span>",
+    scaleArs: "2008 年由美國 Rudolph 等學者發表,以「臨床顯著抗膽鹼副作用」為評分依據(0–3),較聚焦於可量測之臨床事件而非血清生化指標。<span class='block text-xs text-slate-400 mt-1'>Rudolph JL, Salow MJ, Angelini MC, McGlinchey RE. <i>Arch Intern Med</i>. 2008;168(5):508–513.</span>",
     selected: "已選藥物",
     clearAll: "清除全部",
     colDrug: "藥名",
@@ -284,7 +309,7 @@ const I18N = {
     pnTitle: "肺炎風險",
     pn0: "目前無抗膽鹼藥物負擔,肺炎風險未升高。",
     pnHeading: (n) => `累積肺炎風險 (ACB ${n} 分)`,
-    pnMain: (or) => `依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${or} 倍</b>。`,
+    pnMain: (or) => `30 天內住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${or} 倍</b>。`,
     pnCascadeTitle: "逐步累加效應(基線:未服用抗膽鹼藥物):",
     pnStepFirst: "風險升高約",
     pnStepNext: "再升高約",
@@ -331,6 +356,14 @@ const I18N = {
     placeholder: "Drug name (e.g. Quetiapine)",
     addBtn: "Add",
     inputHint: "Type drug name → tap \"Add\" (or pick a suggestion)",
+    methodNote: "Topical preparations are excluded; inhaled medications are included (systemic absorption is documented and has been linked with cardiovascular events).",
+    scalesIntroTitle: "Overview of the 6 anticholinergic burden scales",
+    scaleAcb: "Boustani et al. (USA, 2008). A 0–3 rating of anticholinergic impact on cognition; the most widely used scale internationally and the primary scale used in BMJ 2023 and Clin Epidemiol 2025.<span class='block text-xs text-slate-400 mt-1'>Boustani M, Campbell N, Munger S, Maidment I, Fox C. <i>Aging Health</i>. 2008;4(3):311–320.</span>",
+    scaleAds: "Carnahan et al. (USA, 2006). A 0–3 rating anchored to serum anticholinergic activity (SAA), originally developed for long-term-care residents and their cognitive/functional outcomes.<span class='block text-xs text-slate-400 mt-1'>Carnahan RM, Lund BC, Perry PJ, Pollock BG, Culp KR. <i>J Clin Pharmacol</i>. 2006;46(12):1481–1486.</span>",
+    scaleGabs: "Kiesel et al. (Germany, 2018). A 0–3 scale developed for German prescribing, covering more recently marketed drugs and tailored to European formularies.<span class='block text-xs text-slate-400 mt-1'>Kiesel EK, Hopf YM, Drey M. <i>BMC Geriatr</i>. 2018;18(1):239.</span>",
+    scaleMacb: "Modified ACB by Ah et al. (Korea, 2019). Extends the ACB with Asian-specific medications (e.g. centrally-acting muscle relaxants, locally-used antipsychotics); 0–3 scale, suited to East Asian populations.<span class='block text-xs text-slate-400 mt-1'>Ah YM, Suh Y, Jun K, Hwang S, Lee JY. <i>Basic Clin Pharmacol Toxicol</i>. 2019;124(6):741–748.</span>",
+    scaleKabs: "Jun et al. (Korea, 2019). A 0–3 scale developed specifically for Korean older adults, covering locally-prescribed medications; also applicable to other East Asian populations.<span class='block text-xs text-slate-400 mt-1'>Jun K, Hwang S, Ah YM, Suh Y, Lee JY. <i>Geriatr Gerontol Int</i>. 2019;19(7):628–634.</span>",
+    scaleArs: "Rudolph et al. (USA, 2008). A 0–3 rating based on clinically observed anticholinergic adverse events, focusing on measurable clinical outcomes rather than serum markers.<span class='block text-xs text-slate-400 mt-1'>Rudolph JL, Salow MJ, Angelini MC, McGlinchey RE. <i>Arch Intern Med</i>. 2008;168(5):508–513.</span>",
     selected: "Selected medications",
     clearAll: "Clear all",
     colDrug: "Drug",
@@ -368,7 +401,7 @@ const I18N = {
     pnTitle: "Pneumonia risk",
     pn0: "No current anticholinergic burden; pneumonia risk not elevated.",
     pnHeading: (n) => `Cumulative pneumonia risk (ACB ${n})`,
-    pnMain: (or) => `Based on current medications, hospitalised pneumonia risk is approximately <b class="text-sky-700">${or}× that of non-users</b>.`,
+    pnMain: (or) => `30-day hospitalised pneumonia risk is approximately <b class="text-sky-700">${or}× that of non-users</b>.`,
     pnCascadeTitle: "Stepwise accumulated effect (baseline: no anticholinergic):",
     pnStepFirst: "risk increases by",
     pnStepNext: "further increases by",
@@ -436,6 +469,10 @@ function applyStaticLang() {
     hdrTitle: 'title', hdrSub: 'subtitle',
     inputLabelEl: 'inputLabel', drugInput: { attr: 'placeholder', key: 'placeholder' },
     addBtnEl: 'addBtn', inputHintEl: 'inputHint',
+    methodNoteEl: 'methodNote',
+    scalesIntroTitleEl: 'scalesIntroTitle', scalesIntroExpandEl: 'evExpand',
+    scaleAcbEl: 'scaleAcb', scaleAdsEl: 'scaleAds', scaleGabsEl: 'scaleGabs',
+    scaleMacbEl: 'scaleMacb', scaleKabsEl: 'scaleKabs', scaleArsEl: 'scaleArs',
     selectedTitle: 'selected', clearAll: 'clearAll',
     thDrug: 'colDrug', thTotal: 'colTotal',
     emptyMsgEl: 'emptyMsg',
