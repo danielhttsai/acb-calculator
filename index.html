@@ -47,14 +47,22 @@
 
 <div class="max-w-5xl mx-auto px-3 sm:px-4 py-5 sm:py-8">
 
-  <header class="mb-6 sm:mb-8">
-    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">抗膽鹼藥物負擔計算器</h1>
-    <p class="text-xs sm:text-sm text-slate-500 mt-1">Anticholinergic Burden Calculator · 6 種評分量表整合分析</p>
+  <header class="mb-6 sm:mb-8 relative">
+    <div class="flex items-start justify-between gap-3">
+      <div class="min-w-0 flex-1">
+        <h1 id="hdrTitle" class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">抗膽鹼藥物負擔計算器</h1>
+        <p id="hdrSub" class="text-xs sm:text-sm text-slate-500 mt-1">Anticholinergic Burden Calculator · 6 種評分量表整合分析</p>
+      </div>
+      <div class="flex bg-white rounded-lg border border-slate-200 shadow-sm flex-shrink-0 text-xs">
+        <button type="button" id="langZh" onclick="setLang('zh')" class="px-3 py-1.5 rounded-l-lg transition" style="background:#4f46e5;color:#fff;">中文</button>
+        <button type="button" id="langEn" onclick="setLang('en')" class="px-3 py-1.5 rounded-r-lg transition text-slate-600">English</button>
+      </div>
+    </div>
   </header>
 
   <!-- Drug input section -->
   <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
-    <label class="block text-sm font-medium text-slate-700 mb-2">輸入病人藥物</label>
+    <label id="inputLabelEl" class="block text-sm font-medium text-slate-700 mb-2">輸入病人藥物</label>
     <form id="drugForm" onsubmit="addFirstMatch(); return false;">
       <div class="relative flex gap-2">
         <input id="drugInput" type="search" list="drugDatalist"
@@ -69,27 +77,27 @@
                onkeyup="runSearch()"
                placeholder="輸入藥名 (e.g. Quetiapine)"
                class="flex-1 min-w-0 px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
-        <button type="submit" onclick="addFirstMatch()"
+        <button id="addBtnEl" type="submit" onclick="addFirstMatch()"
                 class="px-5 py-3 bg-indigo-600 text-white rounded-xl font-medium whitespace-nowrap"
                 style="background:#4f46e5;color:#fff;">加入</button>
       </div>
       <datalist id="drugDatalist"></datalist>
       <div id="suggestions" class="hidden mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-72 overflow-y-auto"></div>
     </form>
-    <p class="text-xs text-slate-400 mt-2">輸入藥名 → 點「加入」按鈕 (或從建議中選)</p>
+    <p id="inputHintEl" class="text-xs text-slate-400 mt-2">輸入藥名 → 點「加入」按鈕 (或從建議中選)</p>
   </section>
 
   <!-- Selected drugs -->
   <section id="selectedSection" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6 hidden">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-lg font-semibold text-slate-900">已選藥物 <span id="drugCount" class="text-slate-400 font-normal text-sm"></span></h2>
+      <h2 class="text-lg font-semibold text-slate-900"><span id="selectedTitle">已選藥物</span> <span id="drugCount" class="text-slate-400 font-normal text-sm"></span></h2>
       <button id="clearAll" class="text-sm text-slate-500 hover:text-red-600 transition">清除全部</button>
     </div>
     <div class="overflow-x-auto">
       <table class="drug-table w-full text-sm">
         <thead>
           <tr class="text-left text-slate-500 border-b border-slate-200">
-            <th class="py-2 pr-3 font-medium">藥名</th>
+            <th id="thDrug" class="py-2 pr-3 font-medium">藥名</th>
             <th class="py-2 px-2 font-medium text-center">ACB</th>
             <th class="py-2 px-2 font-medium text-center">ADS</th>
             <th class="py-2 px-2 font-medium text-center">GABS</th>
@@ -102,7 +110,7 @@
         <tbody id="selectedDrugs"></tbody>
         <tfoot>
           <tr class="border-t-2 border-slate-300 font-semibold bg-slate-50">
-            <td class="py-3 pr-3">總分 (Total)</td>
+            <td id="thTotal" class="py-3 pr-3">總分 (Total)</td>
             <td class="py-3 px-2 text-center scale-pill" id="total-ACB">0</td>
             <td class="py-3 px-2 text-center scale-pill" id="total-ADS">0</td>
             <td class="py-3 px-2 text-center scale-pill" id="total-GABS">0</td>
@@ -137,13 +145,13 @@
     <div class="grid md:grid-cols-2 gap-4 mb-6">
       <div class="bg-white rounded-2xl shadow-sm border-2 border-red-200 p-4 sm:p-6">
         <h2 class="text-base font-semibold text-red-900 mb-3 flex items-center gap-2">
-          <span>❤️</span> 心血管事件風險
+          <span>❤️</span> <span id="cvCardTitle">心血管事件風險</span>
         </h2>
         <div id="cvContent" class="text-sm text-slate-700 space-y-2"></div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm border-2 border-sky-200 p-4 sm:p-6">
         <h2 class="text-base font-semibold text-sky-900 mb-3 flex items-center gap-2">
-          <span>🩺</span> 肺炎風險
+          <span>🩺</span> <span id="pnCardTitle">肺炎風險</span>
         </h2>
         <div id="pnContent" class="text-sm text-slate-700 space-y-2"></div>
       </div>
@@ -152,7 +160,7 @@
     <!-- Asian-scale divergence warning -->
     <div id="asianScaleCard" class="hidden bg-purple-50 rounded-2xl border-2 border-purple-200 p-4 sm:p-6 mb-4 sm:mb-6">
       <h2 class="text-base font-semibold text-purple-900 mb-3 flex items-center gap-2">
-        <span>🌏</span> 亞洲族群量表分數偏高
+        <span>🌏</span> <span id="asianCardTitle">亞洲族群量表分數偏高</span>
       </h2>
       <div id="asianScaleContent" class="text-sm text-purple-900 space-y-2"></div>
     </div>
@@ -160,7 +168,7 @@
     <!-- Same-class warning -->
     <div id="sameClassCard" class="hidden bg-amber-50 rounded-2xl border-2 border-amber-200 p-4 sm:p-6 mb-4 sm:mb-6">
       <h2 class="text-base font-semibold text-amber-900 mb-3 flex items-center gap-2">
-        <span>⚠️</span> 同類藥物重複用藥提醒
+        <span>⚠️</span> <span id="sameClassCardTitle">同類藥物重複用藥提醒</span>
       </h2>
       <div id="sameClassContent" class="text-sm text-amber-900 space-y-3"></div>
     </div>
@@ -168,7 +176,7 @@
     <!-- Per-drug alternatives -->
     <div id="drugAltsCard" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
       <h2 class="text-base font-semibold text-slate-900 mb-3 flex items-center gap-2">
-        <span>💊</span> 高負擔藥物替代建議
+        <span>💊</span> <span id="drugAltsCardTitle">高負擔藥物替代建議</span>
       </h2>
       <div id="drugAltsContent" class="space-y-3 text-sm text-slate-700"></div>
     </div>
@@ -176,38 +184,38 @@
     <!-- Monitoring -->
     <div id="monitorCard" class="hidden bg-slate-50 rounded-2xl border border-slate-200 p-5 mb-6">
       <h2 class="text-sm font-semibold text-slate-700 mb-1 flex items-center gap-2">
-        <span>📅</span> 監測建議
+        <span>📅</span> <span id="monitorCardTitle">監測建議</span>
       </h2>
-      <p class="text-xs text-slate-600">近期 (30 天內) 新增或加量抗膽鹼藥物為高風險時段。優先觀察:心悸、胸痛、暈厥、新發呼吸道症狀、認知變化。</p>
+      <p id="monitorCardMsg" class="text-xs text-slate-600">近期 (30 天內) 新增或加量抗膽鹼藥物為高風險時段。優先觀察:心悸、胸痛、暈厥、新發呼吸道症狀、認知變化。</p>
     </div>
 
     <!-- Evidence -->
     <details class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6">
       <summary class="font-semibold text-slate-900 flex items-center justify-between">
-        <span class="flex items-center gap-2"><span class="text-indigo-600">📖</span> 文獻證據摘要</span>
-        <span class="text-slate-400 text-sm">展開</span>
+        <span class="flex items-center gap-2"><span class="text-indigo-600">📖</span> <span id="evidenceTitleEl">文獻證據摘要</span></span>
+        <span id="evExpandEl" class="text-slate-400 text-sm">展開</span>
       </summary>
       <div class="mt-4 space-y-4 text-sm text-slate-600">
         <div>
-          <p class="font-medium text-slate-800">急性心血管事件 (BMJ 2023)</p>
-          <p class="mt-1">≥65 歲族群,近期 30 天內 ACB 升高與心肌梗塞、中風、心律不整、心血管死亡相關 (case-case-time-control 分析):</p>
+          <p id="evCvTitleEl" class="font-medium text-slate-800">急性心血管事件 (BMJ 2023)</p>
+          <p id="evCvDescEl" class="mt-1">≥65 歲族群,近期 30 天內 ACB 升高與心肌梗塞、中風、心律不整、心血管死亡相關 (case-case-time-control 分析):</p>
           <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
-            <li>ACB 1–2 分:急性心血管事件風險 <b>增加約 38%</b>(相比 0 分)</li>
-            <li>ACB ≥3 分:風險約為 <b>2 倍</b>(相比 0 分)</li>
-            <li>ACB ≥5 分:風險約為 <b>2.5 倍</b>(相比 0 分)</li>
-            <li>ACB ≥10 分:風險約為 <b>2.9 倍</b>(相比 0 分)</li>
-            <li>心血管死亡:ACB ≥3 分風險約為 <b>2.4 倍</b></li>
+            <li id="evCvL1El">ACB 1–2 分:急性心血管事件風險 <b>增加約 38%</b>(相比 0 分)</li>
+            <li id="evCvL2El">ACB ≥3 分:風險約為 <b>2 倍</b>(相比 0 分)</li>
+            <li id="evCvL3El">ACB ≥5 分:風險約為 <b>2.5 倍</b>(相比 0 分)</li>
+            <li id="evCvL4El">ACB ≥10 分:風險約為 <b>2.9 倍</b>(相比 0 分)</li>
+            <li id="evCvL5El">心血管死亡:ACB ≥3 分風險約為 <b>2.4 倍</b></li>
           </ul>
           <p class="text-xs text-slate-400 mt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>
         </div>
         <div>
-          <p class="font-medium text-slate-800">住院型肺炎 (Clin Epidemiol 2025)</p>
-          <p class="mt-1">≥65 歲族群,近期 30 天內每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):</p>
+          <p id="evPnTitleEl" class="font-medium text-slate-800">住院型肺炎 (Clin Epidemiol 2025)</p>
+          <p id="evPnDescEl" class="mt-1">≥65 歲族群,近期 30 天內每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):</p>
           <ul class="list-disc list-inside mt-1 space-y-0.5 ml-2">
-            <li>ACB / ADS / GABS:約 <b>+25%</b></li>
-            <li>m-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b></li>
+            <li id="evPnL1El">ACB / ADS / GABS:約 <b>+25%</b></li>
+            <li id="evPnL2El">m-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b></li>
           </ul>
-          <p class="mt-1 text-slate-500">效應為相乘:N 分 ACB 風險約為未服用者的 1.25 的 N 次方倍 (例:3 分 ≈ 2 倍、5 分 ≈ 3 倍)。</p>
+          <p id="evPnNoteEl" class="mt-1 text-slate-500">效應為相乘:N 分 ACB 風險約為未服用者的 1.25 的 N 次方倍 (例:3 分 ≈ 2 倍、5 分 ≈ 3 倍)。</p>
           <p class="text-xs text-slate-400 mt-1">Yang ASH et al. <i>Clin Epidemiol.</i> 2025 Sep 30;17:787–796</p>
         </div>
       </div>
@@ -218,17 +226,239 @@
   <!-- Empty state -->
   <section id="emptyState" class="bg-white rounded-2xl shadow-sm border border-dashed border-slate-300 p-10 text-center">
     <div class="text-5xl mb-3">💊</div>
-    <p class="text-slate-500">輸入病人目前用藥開始計算抗膽鹼負擔</p>
+    <p id="emptyMsgEl" class="text-slate-500">輸入病人目前用藥開始計算抗膽鹼負擔</p>
   </section>
 
   <footer class="mt-8 text-center text-xs text-slate-400">
-    <p>Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc</p>
-    <p class="mt-1">Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796</p>
+    <p id="footerScales">Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc</p>
+    <p id="footerRef" class="mt-1">Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796</p>
   </footer>
 
 </div>
 
 <script>
+let LANG = (function(){ try { return localStorage.getItem('acb-lang') || 'zh'; } catch(e) { return 'zh'; } })();
+
+const I18N = {
+  zh: {
+    title: "抗膽鹼藥物負擔計算器",
+    subtitle: "Anticholinergic Burden Calculator · 6 種評分量表整合分析",
+    inputLabel: "輸入病人藥物",
+    placeholder: "輸入藥名 (e.g. Quetiapine)",
+    addBtn: "加入",
+    inputHint: "輸入藥名 → 點「加入」按鈕 (或從建議中選)",
+    selected: "已選藥物",
+    clearAll: "清除全部",
+    colDrug: "藥名",
+    colTotal: "總分 (Total)",
+    remove: "移除",
+    riskLow: "低風險", riskLowDesc: "目前無抗膽鹼藥物負擔",
+    riskMid: "中度風險 (1–2 分)", riskMidDesc: "建議檢視是否有可替代之低抗膽鹼藥物",
+    riskHigh: "高風險 (≥3 分)", riskHighDesc: "心血管事件、肺炎風險明顯升高;建議優先減量或更換用藥",
+    riskScoreLabel: (n) => `· ACB 總分 ${n}`,
+    cvTitle: "心血管事件風險",
+    cv0Main: "目前無抗膽鹼藥物負擔,屬最低風險族群。",
+    cv0Sub: "維持低負擔可避免心血管事件風險上升。",
+    cv12Tier: "中度抗膽鹼負擔 (ACB 1–2)",
+    cv12Main: "30 天內急性心血管事件風險約",
+    cv12Bold: "增加 38%",
+    cv12After: "(相比未服用)。",
+    cv12Hint: "若臨床許可,建議降至 0 分。",
+    cv3Tier: "高度抗膽鹼負擔 (ACB ≥3)",
+    cv3Main: "30 天內急性心血管事件風險,約為未服用者的",
+    cv3Bold: "2 倍",
+    cv3End: "。",
+    cv3L1: "心血管死亡風險約", cv3L1B: "2.4 倍",
+    cv3L2: "心肌梗塞風險約", cv3L2B: "2.2 倍",
+    cv3L3: "心律不整風險約", cv3L3B: "2.2 倍",
+    cv3L4: "缺血性中風風險約", cv3L4B: "2 倍",
+    cv5Tier: "非常高度抗膽鹼負擔 (ACB ≥5)",
+    cv5Bold: "2.5 倍",
+    cv5L1: "ACB ≥5 vs 0:風險", cv5L1B: "×2.5", cv5L1End: "(增加約 146%)",
+    cv5L2: "ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4",
+    cv10Tier: "極高度抗膽鹼負擔 (ACB ≥10)",
+    cv10Bold: "2.9 倍",
+    cv10L1: "ACB ≥10 vs 0:風險", cv10L1B: "×2.9", cv10L1End: "(增加約 190%)",
+    cv10L2: "ACB ≥5 vs 0:風險 ×2.5",
+    cv10L3: "ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4",
+    pnTitle: "肺炎風險",
+    pn0: "目前無抗膽鹼藥物負擔,肺炎風險未升高。",
+    pnHeading: (n) => `累積肺炎風險 (ACB ${n} 分)`,
+    pnMain: (or) => `依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${or} 倍</b>。`,
+    pnCascadeTitle: "逐步累加效應(基線:未服用抗膽鹼藥物):",
+    pnStepFirst: "風險升高約",
+    pnStepNext: "再升高約",
+    pnCum: (or) => `(累積 ${or} 倍)`,
+    pnNote: "註:ACB ≥6 部分為外推估計。原始研究主分析為每分 ×1.25;ACB 6 分以上參考心血管事件 ≥5 vs ≥10 之相對風險梯度(BMJ 2023),採每分 ×1.03 漸增。",
+    asianTitle: "亞洲族群量表分數偏高",
+    asianIntro: "m-ACB 與 KABS 是針對<b>亞洲族群</b>開發或修訂的量表,常涵蓋本地常用而 ACB 未列入的藥物 (如部分中樞性肌肉鬆弛劑、亞洲常用抗精神病藥)。",
+    asianLine: (scale, val, acb, diff) => `· <b>${scale}</b> = ${val} 分(較 ACB ${acb} 分多 <b>+${diff}</b> 分)`,
+    asianMid: '本病人在亞洲量表的分數明顯高於 ACB,代表 ACB 可能<b>低估</b>實際抗膽鹼負擔。建議:',
+    asianL1: "即使 ACB 看似中低度,仍應視同高負擔處理 (參照亞洲量表)",
+    asianL2: "檢視造成差異的藥物 (常見:Tizanidine、Biperiden、Otilonium、Glycopyrrolate、Pipoxolan 等)",
+    asianL3: "可考慮減量或換用低負擔同類藥物",
+    sameClassTitle: "同類藥物重複用藥提醒",
+    sameClassNote: "同類別合併使用會疊加抗膽鹼負擔且可能屬重複治療,建議檢視必要性與整併。",
+    altsTitle: "高負擔藥物替代建議",
+    altsNone: "本資料庫內無同類較低負擔藥物可建議",
+    monitorTitle: "監測建議",
+    monitorMsg: "近期 (30 天內) 新增或加量抗膽鹼藥物為高風險時段。優先觀察:心悸、胸痛、暈厥、新發呼吸道症狀、認知變化。",
+    emptyMsg: "輸入病人目前用藥開始計算抗膽鹼負擔",
+    evidenceTitle: "文獻證據摘要",
+    evExpand: "展開",
+    evCvTitle: "急性心血管事件 (BMJ 2023)",
+    evCvDesc: "≥65 歲族群,近期 30 天內 ACB 升高與心肌梗塞、中風、心律不整、心血管死亡相關 (case-case-time-control 分析):",
+    evCvL1: 'ACB 1–2 分:急性心血管事件風險 <b>增加約 38%</b>(相比 0 分)',
+    evCvL2: 'ACB ≥3 分:風險約為 <b>2 倍</b>(相比 0 分)',
+    evCvL3: 'ACB ≥5 分:風險約為 <b>2.5 倍</b>(相比 0 分)',
+    evCvL4: 'ACB ≥10 分:風險約為 <b>2.9 倍</b>(相比 0 分)',
+    evCvL5: '心血管死亡:ACB ≥3 分風險約為 <b>2.4 倍</b>',
+    evPnTitle: "住院型肺炎 (Clin Epidemiol 2025)",
+    evPnDesc: "≥65 歲族群,近期 30 天內每多 1 分 ACB,住院肺炎風險約增加 (case-crossover 分析):",
+    evPnL1: 'ACB / ADS / GABS:約 <b>+25%</b>',
+    evPnL2: 'm-ACB:約 <b>+22%</b> · KABS:約 <b>+23%</b>',
+    evPnNote: "效應為相乘:N 分 ACB 風險約為未服用者的 1.25 的 N 次方倍 (例:3 分 ≈ 2 倍、5 分 ≈ 3 倍)。",
+    drugDbHint: "藥物資料來源:PHDc · 共 122 種藥物",
+    footerScales: 'Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc',
+    footerRef: 'Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796',
+    inAppWarn: '⚠ 偵測到 in-app 瀏覽器(LINE/FB/IG 等),功能可能受限<br>請點右上角「⋯」選單 → <b>「以瀏覽器/Safari 開啟」</b>',
+    noscript: '⚠ 此頁面需要啟用 JavaScript<br>請複製連結後以 <b>Safari</b> (iPhone) 或 <b>Chrome</b> (Android) 開啟',
+  },
+  en: {
+    title: "Anticholinergic Burden Calculator",
+    subtitle: "Anticholinergic Burden Calculator · Integrated 6-scale analysis",
+    inputLabel: "Enter patient medications",
+    placeholder: "Drug name (e.g. Quetiapine)",
+    addBtn: "Add",
+    inputHint: "Type drug name → tap \"Add\" (or pick a suggestion)",
+    selected: "Selected medications",
+    clearAll: "Clear all",
+    colDrug: "Drug",
+    colTotal: "Total",
+    remove: "Remove",
+    riskLow: "Low risk", riskLowDesc: "No current anticholinergic burden",
+    riskMid: "Moderate risk (1–2 points)", riskMidDesc: "Consider lower-burden alternatives where clinically appropriate",
+    riskHigh: "High risk (≥3 points)", riskHighDesc: "Markedly elevated cardiovascular and pneumonia risk; consider dose reduction or substitution",
+    riskScoreLabel: (n) => `· ACB total ${n}`,
+    cvTitle: "Cardiovascular event risk",
+    cv0Main: "No current anticholinergic burden — lowest-risk group.",
+    cv0Sub: "Maintaining a low burden helps avoid elevated cardiovascular risk.",
+    cv12Tier: "Moderate anticholinergic burden (ACB 1–2)",
+    cv12Main: "30-day acute cardiovascular event risk is approximately",
+    cv12Bold: "38% higher",
+    cv12After: "compared with non-users.",
+    cv12Hint: "Reduce to 0 if clinically feasible.",
+    cv3Tier: "High anticholinergic burden (ACB ≥3)",
+    cv3Main: "30-day acute cardiovascular event risk is approximately",
+    cv3Bold: "2× that of non-users",
+    cv3End: ".",
+    cv3L1: "Cardiovascular death risk approximately", cv3L1B: "2.4×",
+    cv3L2: "Myocardial infarction risk approximately", cv3L2B: "2.2×",
+    cv3L3: "Arrhythmia risk approximately", cv3L3B: "2.2×",
+    cv3L4: "Ischaemic stroke risk approximately", cv3L4B: "2×",
+    cv5Tier: "Very high anticholinergic burden (ACB ≥5)",
+    cv5Bold: "2.5× that of non-users",
+    cv5L1: "ACB ≥5 vs 0: risk", cv5L1B: "×2.5", cv5L1End: "(≈146% increase)",
+    cv5L2: "ACB ≥3 vs 0: risk ×2; CV death ×2.4",
+    cv10Tier: "Extreme anticholinergic burden (ACB ≥10)",
+    cv10Bold: "2.9× that of non-users",
+    cv10L1: "ACB ≥10 vs 0: risk", cv10L1B: "×2.9", cv10L1End: "(≈190% increase)",
+    cv10L2: "ACB ≥5 vs 0: risk ×2.5",
+    cv10L3: "ACB ≥3 vs 0: risk ×2; CV death ×2.4",
+    pnTitle: "Pneumonia risk",
+    pn0: "No current anticholinergic burden; pneumonia risk not elevated.",
+    pnHeading: (n) => `Cumulative pneumonia risk (ACB ${n})`,
+    pnMain: (or) => `Based on current medications, hospitalised pneumonia risk is approximately <b class="text-sky-700">${or}× that of non-users</b>.`,
+    pnCascadeTitle: "Stepwise accumulated effect (baseline: no anticholinergic):",
+    pnStepFirst: "risk increases by",
+    pnStepNext: "further increases by",
+    pnCum: (or) => `(cumulative ${or}×)`,
+    pnNote: "Note: values for ACB ≥6 are extrapolated. The primary analysis used ×1.25 per point. For ACB ≥6, the gradient was anchored to the BMJ 2023 ≥5 vs ≥10 cardiovascular risk ratio, applying ×1.03 per additional point.",
+    asianTitle: "Asian-population scale scores elevated",
+    asianIntro: "The m-ACB and KABS scales were developed or revised for <b>Asian populations</b> and capture locally-used drugs that the ACB scale does not list (e.g. some centrally-acting muscle relaxants and Asian antipsychotics).",
+    asianLine: (scale, val, acb, diff) => `· <b>${scale}</b> = ${val} (vs ACB ${acb}, <b>+${diff}</b> points higher)`,
+    asianMid: 'This patient scores notably higher on the Asian scales than on the ACB, suggesting the ACB may <b>underestimate</b> actual anticholinergic burden. Suggested actions:',
+    asianL1: "Treat as high burden even if the ACB appears mild–moderate (use the Asian scale value)",
+    asianL2: "Identify the drugs driving the gap (commonly Tizanidine, Biperiden, Otilonium, Glycopyrrolate, Pipoxolan)",
+    asianL3: "Consider dose reduction or switching to a lower-burden agent within the same class",
+    sameClassTitle: "Same-class duplicate therapy alert",
+    sameClassNote: "Combining drugs from the same class compounds anticholinergic burden and may represent duplicate therapy. Review clinical necessity and consider consolidation.",
+    altsTitle: "Alternatives for high-burden drugs",
+    altsNone: "No same-class lower-burden alternative available in this database",
+    monitorTitle: "Monitoring recommendations",
+    monitorMsg: "Recent (within 30 days) drug additions or dose increases are high-risk windows. Watch for: palpitations, chest pain, syncope, new respiratory symptoms, and cognitive changes.",
+    emptyMsg: "Enter the patient's current medications to begin",
+    evidenceTitle: "Evidence summary",
+    evExpand: "Expand",
+    evCvTitle: "Acute cardiovascular events (BMJ 2023)",
+    evCvDesc: "In adults ≥65 years, recently elevated ACB within 30 days was associated with myocardial infarction, stroke, arrhythmia and cardiovascular death (case-case-time-control analysis):",
+    evCvL1: 'ACB 1–2: acute cardiovascular event risk <b>≈38% higher</b> (vs 0)',
+    evCvL2: 'ACB ≥3: risk approximately <b>2×</b> (vs 0)',
+    evCvL3: 'ACB ≥5: risk approximately <b>2.5×</b> (vs 0)',
+    evCvL4: 'ACB ≥10: risk approximately <b>2.9×</b> (vs 0)',
+    evCvL5: 'Cardiovascular death: ACB ≥3 risk approximately <b>2.4×</b>',
+    evPnTitle: "Hospitalised pneumonia (Clin Epidemiol 2025)",
+    evPnDesc: "In adults ≥65 years, each 1-point increase in ACB within 30 days was associated with an increased hospitalised pneumonia risk (case-crossover analysis):",
+    evPnL1: 'ACB / ADS / GABS: approximately <b>+25%</b>',
+    evPnL2: 'm-ACB: approximately <b>+22%</b> · KABS: approximately <b>+23%</b>',
+    evPnNote: "Multiplicative effect: ACB N points ≈ 1.25^N times non-user risk (e.g. 3 points ≈ ×2, 5 points ≈ ×3).",
+    drugDbHint: "Drug data source: PHDc · 122 medications",
+    footerScales: 'Scales: ACB · ADS · GABS · mACB · KABS · ARS &nbsp;|&nbsp; 122 drugs from PHDc',
+    footerRef: 'Reference: Huang et al. <em>BMJ</em> 2023;382:e076045 · Yang et al. <em>Clin Epidemiol.</em> 2025 Sep 30;17:787–796',
+    inAppWarn: '⚠ In-app browser detected (LINE / FB / IG, etc.) — features may be limited.<br>Please open via the share menu → <b>"Open in browser/Safari"</b>.',
+    noscript: '⚠ This page requires JavaScript.<br>Please open in <b>Safari</b> (iPhone) or <b>Chrome</b> (Android).',
+  },
+};
+
+const t = (k) => I18N[LANG][k];
+
+function setLang(lang) {
+  LANG = lang;
+  try { localStorage.setItem('acb-lang', lang); } catch(e) {}
+  // Update toggle button visual state
+  const zhBtn = document.getElementById('langZh');
+  const enBtn = document.getElementById('langEn');
+  if (zhBtn && enBtn) {
+    if (lang === 'zh') {
+      zhBtn.style.background = '#4f46e5'; zhBtn.style.color = '#fff';
+      enBtn.style.background = ''; enBtn.style.color = '';
+    } else {
+      enBtn.style.background = '#4f46e5'; enBtn.style.color = '#fff';
+      zhBtn.style.background = ''; zhBtn.style.color = '';
+    }
+  }
+  applyStaticLang();
+  if (typeof render === 'function') render();
+}
+
+function applyStaticLang() {
+  const map = {
+    hdrTitle: 'title', hdrSub: 'subtitle',
+    inputLabelEl: 'inputLabel', drugInput: { attr: 'placeholder', key: 'placeholder' },
+    addBtnEl: 'addBtn', inputHintEl: 'inputHint',
+    selectedTitle: 'selected', clearAll: 'clearAll',
+    thDrug: 'colDrug', thTotal: 'colTotal',
+    emptyMsgEl: 'emptyMsg',
+    evidenceTitleEl: 'evidenceTitle', evExpandEl: 'evExpand',
+    evCvTitleEl: 'evCvTitle', evCvDescEl: 'evCvDesc',
+    evCvL1El: 'evCvL1', evCvL2El: 'evCvL2', evCvL3El: 'evCvL3', evCvL4El: 'evCvL4', evCvL5El: 'evCvL5',
+    evPnTitleEl: 'evPnTitle', evPnDescEl: 'evPnDesc',
+    evPnL1El: 'evPnL1', evPnL2El: 'evPnL2', evPnNoteEl: 'evPnNote',
+    cvCardTitle: 'cvTitle', pnCardTitle: 'pnTitle',
+    asianCardTitle: 'asianTitle', sameClassCardTitle: 'sameClassTitle',
+    drugAltsCardTitle: 'altsTitle',
+    monitorCardTitle: 'monitorTitle', monitorCardMsg: 'monitorMsg',
+    footerScales: 'footerScales', footerRef: 'footerRef',
+  };
+  Object.keys(map).forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const v = map[id];
+    if (typeof v === 'string') el.innerHTML = t(v);
+    else if (v.attr) el.setAttribute(v.attr, t(v.key));
+  });
+}
+
 (function() {
   var ua = navigator.userAgent || "";
   var inApp = /Line\/|FBAN|FBAV|FB_IAB|Instagram|MicroMessenger|WeChat|MQQBrowser|TikTok|Twitter/i.test(ua);
@@ -236,7 +466,7 @@
     var w = document.getElementById("inAppWarn");
     if (w) {
       w.style.display = "block";
-      w.innerHTML = "⚠ 偵測到 in-app 瀏覽器(LINE/FB/IG 等),功能可能受限<br>請點右上角「⋯」選單 → <b>「以瀏覽器/Safari 開啟」</b>";
+      w.innerHTML = (I18N[LANG] && I18N[LANG].inAppWarn) || I18N.zh.inAppWarn;
     }
   }
 })();
@@ -310,9 +540,9 @@ function totals() {
 }
 
 function classify(acb) {
-  if (acb === 0) return { level:"low", label:"低風險", emoji:"✓", desc:"目前無抗膽鹼藥物負擔", bg:"bg-emerald-50", border:"border-emerald-200", iconBg:"bg-emerald-100 text-emerald-700", text:"text-emerald-900" };
-  if (acb <= 2) return { level:"mid", label:"中度風險 (1–2 分)", emoji:"!", desc:"建議檢視是否有可替代之低抗膽鹼藥物", bg:"bg-amber-50", border:"border-amber-200", iconBg:"bg-amber-100 text-amber-700", text:"text-amber-900" };
-  return { level:"high", label:"高風險 (≥3 分)", emoji:"⚠", desc:"心血管事件、肺炎風險明顯升高;建議優先減量或更換用藥", bg:"bg-red-50", border:"border-red-200", iconBg:"bg-red-100 text-red-700", text:"text-red-900" };
+  if (acb === 0) return { level:"low", label:t('riskLow'), emoji:"✓", desc:t('riskLowDesc'), bg:"bg-emerald-50", border:"border-emerald-200", iconBg:"bg-emerald-100 text-emerald-700", text:"text-emerald-900" };
+  if (acb <= 2) return { level:"mid", label:t('riskMid'), emoji:"!", desc:t('riskMidDesc'), bg:"bg-amber-50", border:"border-amber-200", iconBg:"bg-amber-100 text-amber-700", text:"text-amber-900" };
+  return { level:"high", label:t('riskHigh'), emoji:"⚠", desc:t('riskHighDesc'), bg:"bg-red-50", border:"border-red-200", iconBg:"bg-red-100 text-red-700", text:"text-red-900" };
 }
 
 const ATC_CLASS = {
@@ -373,45 +603,100 @@ const ALTERNATIVES = {
   "Meclizine": "本資料庫內無低負擔同類 antivertigo / antihistamine 替代;評估減量或非藥物處置",
 };
 
+const ATC_CLASS_EN = {
+  "A02BA": "H2 receptor antagonist",
+  "A03AB": "GI antispasmodic (quaternary ammonium)",
+  "A03BA": "Belladonna alkaloid",
+  "A03BB": "Belladonna alkaloid derivative",
+  "A03FA": "Propulsives (antiemetic / prokinetic)",
+  "B01AC": "Antiplatelet",
+  "C01DA": "Nitrates",
+  "C07AB": "Selective β-blocker",
+  "G04BD": "Bladder antispasmodic (anti-muscarinic)",
+  "H02AB": "Glucocorticoid",
+  "M03BX": "Centrally-acting muscle relaxant",
+  "N02AA": "Natural opioid",
+  "N02AB": "Phenylpiperidine opioid",
+  "N03AF": "Carboxamide antiepileptic",
+  "N04AA": "Antimuscarinic anti-Parkinson agent",
+  "N04BC": "Dopamine agonist",
+  "N05AA": "Phenothiazine (aliphatic) antipsychotic",
+  "N05AB": "Phenothiazine (piperazine) antipsychotic",
+  "N05AH": "Atypical antipsychotic (diazepines/thiepines)",
+  "N05AL": "Benzamide antipsychotic",
+  "N05AX": "Other antipsychotic",
+  "N05BA": "Benzodiazepine anxiolytic",
+  "N05CD": "Benzodiazepine hypnotic",
+  "N06AA": "Tricyclic antidepressant (TCA)",
+  "N06AB": "Selective serotonin reuptake inhibitor (SSRI)",
+  "N06AX": "Other antidepressant",
+  "R03AL": "Bronchodilator (β2 + anti-muscarinic)",
+  "R03BB": "Inhaled anticholinergic bronchodilator",
+  "R06AA": "Aminoalkyl ether antihistamine (1st gen)",
+  "R06AE": "Piperazine antihistamine",
+  "R06AX": "Other systemic antihistamine",
+};
+
+const ALTERNATIVES_EN = {
+  "Oxethazaine": "Topical GI anaesthetic, typically short-term use; consider discontinuation.",
+  "Atropine": "Used for emergency or specific indications; usually clinically necessary.",
+  "Hyoscine Butylbromide": "No lower-burden GI antispasmodic alternative available in this database.",
+  "Multivitamin": "Confirm components are clinically necessary; non-essential supplementation can be stopped.",
+  "Oxybutynin": "All same-class agents in this database (Tolterodine, Solifenacin) score ACB=3. Mirabegron (β3-agonist, not in this database) is a lower-burden alternative.",
+  "Tolterodine": "All same-class agents in this database (Oxybutynin, Solifenacin) score ACB=3. Mirabegron (β3-agonist) is a lower-burden alternative.",
+  "Solifenacin": "All same-class agents in this database (Oxybutynin, Tolterodine) score ACB=3. Mirabegron (β3-agonist) is a lower-burden alternative.",
+  "Trihexyphenidyl": "Antimuscarinic anti-Parkinson agent — no lower-burden same-class alternative in this database (Biperiden m-ACB=3).",
+  "Chlorpromazine": "No lower-burden typical antipsychotic in this database. If clinically appropriate, switching to atypical Aripiprazole / Risperidone / Paliperidone (ACB=1) lowers burden.",
+  "Trifluoperazine": "No lower-burden typical antipsychotic in this database. If clinically appropriate, switching to atypical Aripiprazole / Risperidone / Paliperidone (ACB=1) lowers burden.",
+  "Clozapine": "Treatment-resistant indication; usually cannot be substituted directly.",
+  "Olanzapine": "Among atypical antipsychotics, Aripiprazole / Risperidone / Paliperidone (ACB=1) carry a lower burden.",
+  "Quetiapine": "Among atypical antipsychotics, Aripiprazole / Risperidone / Paliperidone (ACB=1) carry a lower burden.",
+  "Hydroxyzine": "If clinically appropriate, switch to a 2nd-gen H1 blocker: Fexofenadine (ACB=0), or Loratadine / Desloratadine / Levocetirizine (ACB=1).",
+  "Imipramine": "All TCAs score ACB=3. For depression, consider an SSRI: Sertraline / Fluoxetine / Escitalopram (ACB=0).",
+  "Clomipramine": "All TCAs score ACB=3. For depression / OCD, consider an SSRI: Sertraline / Escitalopram (ACB=0).",
+  "Doxepin": "All TCAs score ACB=3. For insomnia, consider non-pharmacological measures or low-dose alternatives; for depression, consider an SSRI.",
+  "Paroxetine": "Among SSRIs, Sertraline / Fluoxetine / Escitalopram (ACB=0) carry a lower burden.",
+  "Cough Mixture": "Often contains 1st-gen antihistamines; review formulation or consider discontinuation.",
+  "Diphenhydramine": "Switch to a 2nd-gen H1 blocker: Fexofenadine (ACB=0), or Loratadine / Desloratadine (ACB=1).",
+  "Meclizine": "No lower-burden same-class antivertigo / antihistamine in this database; consider dose reduction or non-pharmacological management.",
+};
+
 function cvText(acb) {
+  const cite = `<p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
   if (acb === 0) {
-    return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,屬最低風險族群。</p>
-            <p class="text-xs text-slate-500">維持低負擔可避免心血管事件風險上升。</p>`;
+    return `<p class="text-emerald-700 font-medium">${t('cv0Main')}</p>
+            <p class="text-xs text-slate-500">${t('cv0Sub')}</p>`;
   }
   if (acb >= 10) {
-    return `<p class="font-medium text-red-700">極高度抗膽鹼負擔 (ACB ≥10)</p>
-            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2.9 倍</b>。</p>
+    return `<p class="font-medium text-red-700">${t('cv10Tier')}</p>
+            <p class="text-sm text-slate-700">${t('cv3Main')} <b class="text-red-700">${t('cv10Bold')}</b>${t('cv3End')}</p>
             <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
-              <div>· ACB ≥10 vs 0:風險 <b>×2.9</b>(增加約 190%)</div>
-              <div>· ACB ≥5 vs 0:風險 ×2.5</div>
-              <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
-            </div>
-            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+              <div>${t('cv10L1')} <b>${t('cv10L1B')}</b>${t('cv10L1End')}</div>
+              <div>${t('cv10L2')}</div>
+              <div>${t('cv10L3')}</div>
+            </div>${cite}`;
   }
   if (acb >= 5) {
-    return `<p class="font-medium text-red-700">非常高度抗膽鹼負擔 (ACB ≥5)</p>
-            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2.5 倍</b>。</p>
+    return `<p class="font-medium text-red-700">${t('cv5Tier')}</p>
+            <p class="text-sm text-slate-700">${t('cv3Main')} <b class="text-red-700">${t('cv5Bold')}</b>${t('cv3End')}</p>
             <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
-              <div>· ACB ≥5 vs 0:風險 <b>×2.5</b>(增加約 146%)</div>
-              <div>· ACB ≥3 vs 0:風險 ×2;心血管死亡 ×2.4</div>
-            </div>
-            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+              <div>${t('cv5L1')} <b>${t('cv5L1B')}</b> ${t('cv5L1End')}</div>
+              <div>${t('cv5L2')}</div>
+            </div>${cite}`;
   }
   if (acb >= 3) {
-    return `<p class="font-medium text-red-700">高度抗膽鹼負擔 (ACB ≥3)</p>
-            <p class="text-sm text-slate-700">30 天內急性心血管事件風險,約為未服用者的 <b class="text-red-700">2 倍</b>。</p>
+    return `<p class="font-medium text-red-700">${t('cv3Tier')}</p>
+            <p class="text-sm text-slate-700">${t('cv3Main')} <b class="text-red-700">${t('cv3Bold')}</b>${t('cv3End')}</p>
             <div class="text-xs space-y-0.5 pl-2 border-l-2 border-red-200">
-              <div>· 心血管死亡風險約 <b>2.4 倍</b></div>
-              <div>· 心肌梗塞風險約 <b>2.2 倍</b></div>
-              <div>· 心律不整風險約 <b>2.2 倍</b></div>
-              <div>· 缺血性中風風險約 <b>2 倍</b></div>
-            </div>
-            <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+              <div>${t('cv3L1')} <b>${t('cv3L1B')}</b></div>
+              <div>${t('cv3L2')} <b>${t('cv3L2B')}</b></div>
+              <div>${t('cv3L3')} <b>${t('cv3L3B')}</b></div>
+              <div>${t('cv3L4')} <b>${t('cv3L4B')}</b></div>
+            </div>${cite}`;
   }
-  return `<p class="font-medium text-amber-700">中度抗膽鹼負擔 (ACB 1–2)</p>
-          <p class="text-sm text-slate-700">30 天內急性心血管事件風險約 <b class="text-amber-700">增加 38%</b>(相比未服用)。</p>
-          <p class="text-xs text-slate-600">若臨床許可,建議降至 0 分。</p>
-          <p class="text-xs text-slate-400 pt-1">Huang WC et al. <i>BMJ</i> 2023;382:e076045</p>`;
+  return `<p class="font-medium text-amber-700">${t('cv12Tier')}</p>
+          <p class="text-sm text-slate-700">${t('cv12Main')} <b class="text-amber-700">${t('cv12Bold')}</b>${t('cv12After')}</p>
+          <p class="text-xs text-slate-600">${t('cv12Hint')}</p>${cite}`;
 }
 
 // Capped pneumonia risk: 1.25 per point up to ACB 5 (paper main analysis),
@@ -426,7 +711,7 @@ function pnCumOR(points) {
 function pnText(drugList) {
   const totalPts = drugList.reduce((s,d) => s + d.ACB, 0);
   if (totalPts === 0) {
-    return `<p class="text-emerald-700 font-medium">目前無抗膽鹼藥物負擔,肺炎風險未升高。</p>`;
+    return `<p class="text-emerald-700 font-medium">${t('pn0')}</p>`;
   }
   const totalOR = pnCumOR(totalPts);
   const contributors = drugList.filter(d => d.ACB > 0);
@@ -437,19 +722,19 @@ function pnText(drugList) {
     const afterOR = pnCumOR(cum);
     const stepRatio = afterOR / beforeOR;
     const pct = Math.round((stepRatio - 1) * 100);
-    const verb = i === 0 ? "風險升高約" : "再升高約";
+    const verb = i === 0 ? t('pnStepFirst') : t('pnStepNext');
     return `<div class="cascade-row flex items-center justify-between gap-2 text-xs py-1">
       <span class="truncate text-slate-700 min-w-0">+ ${d.name} <span class="text-slate-400">(ACB=${d.ACB})</span></span>
-      <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">(累積 ${afterOR.toFixed(2)} 倍)</span></span>
+      <span class="whitespace-nowrap text-sky-700">${verb} <b>${pct}%</b> <span class="text-slate-400">${t('pnCum')(afterOR.toFixed(2))}</span></span>
     </div>`;
   }).join("");
   const note = totalPts > 5
-    ? `<p class="text-xs text-amber-700 pt-1">註:ACB ≥6 部分為外推估計。原始研究主分析為每分 ×1.25;ACB 6 分以上參考心血管事件 ≥5 vs ≥10 之相對風險梯度(BMJ 2023),採每分 ×1.03 漸增。</p>`
+    ? `<p class="text-xs text-amber-700 pt-1">${t('pnNote')}</p>`
     : '';
-  return `<p class="font-medium text-sky-700">累積肺炎風險 (ACB ${totalPts} 分)</p>
-          <p class="text-sm text-slate-700">依目前用藥,住院肺炎風險約為未服用抗膽鹼藥物者的 <b class="text-sky-700">${totalOR.toFixed(2)} 倍</b>。</p>
+  return `<p class="font-medium text-sky-700">${t('pnHeading')(totalPts)}</p>
+          <p class="text-sm text-slate-700">${t('pnMain')(totalOR.toFixed(2))}</p>
           <div class="bg-slate-50 rounded-lg px-3 py-2 mt-1">
-            <div class="text-xs text-slate-500 mb-1">逐步累加效應(基線:未服用抗膽鹼藥物):</div>
+            <div class="text-xs text-slate-500 mb-1">${t('pnCascadeTitle')}</div>
             ${stepsHtml}
           </div>
           ${note}
@@ -469,7 +754,7 @@ function findSameClass(drugList) {
 }
 
 function render() {
-  const t = totals();
+  const tot = totals();
   $("drugCount").textContent = selected.length ? `(${selected.length})` : "";
   $("selectedSection").classList.toggle("hidden", !selected.length);
   $("resultsSection").classList.toggle("hidden", !selected.length);
@@ -483,7 +768,7 @@ function render() {
       </td>
       ${SCALES.map(s => `<td class="py-2.5 px-2 text-center scale-pill ${d[s]>=3?'text-red-600 font-semibold':d[s]>=1?'text-amber-600':'text-slate-300'}">${d[s]}</td>`).join("")}
       <td class="py-2.5 pl-2 text-right">
-        <button class="text-slate-400 hover:text-red-600 transition" data-rm="${i}" title="移除">✕</button>
+        <button class="text-slate-400 hover:text-red-600 transition" data-rm="${i}" title="${t('remove')}">✕</button>
       </td>
     </tr>`;
   }).join("");
@@ -491,11 +776,11 @@ function render() {
     b.addEventListener("click", () => removeDrug(+b.dataset.rm))
   );
 
-  SCALES.forEach(s => $("total-"+s).textContent = t[s]);
+  SCALES.forEach(s => $("total-"+s).textContent = tot[s]);
 
   if (!selected.length) return;
 
-  const c = classify(t.ACB);
+  const c = classify(tot.ACB);
   const card = $("riskCard");
   card.className = `rounded-2xl shadow-sm border p-4 sm:p-6 mb-4 sm:mb-6 transition ${c.bg} ${c.border}`;
   $("riskIcon").className = `w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${c.iconBg}`;
@@ -503,30 +788,28 @@ function render() {
   $("riskTitle").className = `text-lg font-semibold ${c.text}`;
   $("riskTitle").textContent = c.label;
   $("riskScoreLabel").className = `text-sm ${c.text} opacity-75`;
-  $("riskScoreLabel").textContent = `· ACB 總分 ${t.ACB}`;
+  $("riskScoreLabel").textContent = t('riskScoreLabel')(tot.ACB);
   $("riskSubtitle").className = `text-sm mt-1 ${c.text} opacity-80`;
   $("riskSubtitle").textContent = c.desc;
 
-  $("cvContent").innerHTML = cvText(t.ACB);
+  $("cvContent").innerHTML = cvText(tot.ACB);
   $("pnContent").innerHTML = pnText(selected);
 
   const THRESHOLD = 2;
   const flagged = [];
-  if (t.mACB - t.ACB >= THRESHOLD) flagged.push({ scale:"m-ACB", val:t.mACB, diff:t.mACB - t.ACB });
-  if (t.KABS - t.ACB >= THRESHOLD) flagged.push({ scale:"KABS",  val:t.KABS, diff:t.KABS - t.ACB });
+  if (tot.mACB - tot.ACB >= THRESHOLD) flagged.push({ scale:"m-ACB", val:tot.mACB, diff:tot.mACB - tot.ACB });
+  if (tot.KABS - tot.ACB >= THRESHOLD) flagged.push({ scale:"KABS",  val:tot.KABS, diff:tot.KABS - tot.ACB });
   if (flagged.length) {
     $("asianScaleCard").classList.remove("hidden");
-    const lines = flagged.map(f =>
-      `<div>· <b>${f.scale}</b> = ${f.val} 分(較 ACB ${t.ACB} 分多 <b>+${f.diff}</b> 分)</div>`
-    ).join("");
+    const lines = flagged.map(f => `<div>${t('asianLine')(f.scale, f.val, tot.ACB, f.diff)}</div>`).join("");
     $("asianScaleContent").innerHTML = `
-      <p>m-ACB 與 KABS 是針對<b>亞洲族群</b>開發或修訂的量表,常涵蓋本地常用而 ACB 未列入的藥物 (如部分中樞性肌肉鬆弛劑、亞洲常用抗精神病藥)。</p>
+      <p>${t('asianIntro')}</p>
       ${lines}
-      <p class="text-xs">本病人在亞洲量表的分數明顯高於 ACB,代表 ACB 可能<b>低估</b>實際抗膽鹼負擔。建議:</p>
+      <p class="text-xs">${t('asianMid')}</p>
       <ul class="text-xs list-disc list-inside ml-1 space-y-0.5 opacity-90">
-        <li>即使 ACB 看似中低度,仍應視同高負擔處理 (參照亞洲量表)</li>
-        <li>檢視造成差異的藥物 (常見:Tizanidine、Biperiden、Otilonium、Glycopyrrolate、Pipoxolan 等)</li>
-        <li>可考慮減量或換用低負擔同類藥物</li>
+        <li>${t('asianL1')}</li>
+        <li>${t('asianL2')}</li>
+        <li>${t('asianL3')}</li>
       </ul>`;
   } else {
     $("asianScaleCard").classList.add("hidden");
@@ -535,13 +818,15 @@ function render() {
   const groups = findSameClass(selected);
   if (groups.length) {
     $("sameClassCard").classList.remove("hidden");
+    const sep = LANG === 'zh' ? '、' : ', ';
+    const atcMap = LANG === 'en' ? ATC_CLASS_EN : ATC_CLASS;
     $("sameClassContent").innerHTML = groups.map(g => {
-      const className = ATC_CLASS[g.cls] || `ATC ${g.cls}`;
-      const names = g.drugs.map(d => `<b>${d.name}</b> (ACB=${d.ACB})`).join("、");
+      const className = atcMap[g.cls] || `ATC ${g.cls}`;
+      const names = g.drugs.map(d => `<b>${d.name}</b> (ACB=${d.ACB})`).join(sep);
       return `<div class="border-l-2 border-amber-300 pl-3">
         <div class="font-medium">${className}</div>
         <div class="text-sm">${names}</div>
-        <div class="text-xs opacity-80 mt-0.5">同類別合併使用會疊加抗膽鹼負擔且可能屬重複治療,建議檢視必要性與整併。</div>
+        <div class="text-xs opacity-80 mt-0.5">${t('sameClassNote')}</div>
       </div>`;
     }).join("");
   } else {
@@ -551,8 +836,9 @@ function render() {
   const high = selected.filter(d => d.ACB >= 3);
   if (high.length) {
     $("drugAltsCard").classList.remove("hidden");
+    const altMap = LANG === 'en' ? ALTERNATIVES_EN : ALTERNATIVES;
     $("drugAltsContent").innerHTML = high.map(d => {
-      const alt = ALTERNATIVES[d.name] || "本資料庫內無同類較低負擔藥物可建議";
+      const alt = altMap[d.name] || t('altsNone');
       return `<div class="border-l-2 border-indigo-200 pl-3">
         <div class="font-medium text-slate-800">${d.name} <span class="text-xs text-red-600 ml-1">ACB=3</span></div>
         <div class="text-xs text-slate-600 mt-0.5">${alt}</div>
@@ -562,7 +848,7 @@ function render() {
     $("drugAltsCard").classList.add("hidden");
   }
 
-  $("monitorCard").classList.toggle("hidden", t.ACB === 0);
+  $("monitorCard").classList.toggle("hidden", tot.ACB === 0);
 }
 
 function runSearch() {
@@ -618,6 +904,7 @@ document.addEventListener("click", e => {
 
 $("clearAll").addEventListener("click", () => { selected.length = 0; render(); });
 
+setLang(LANG);
 render();
 </script>
 </body>
