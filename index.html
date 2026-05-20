@@ -2,30 +2,26 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <title>抗膽鹼藥物負擔計算器 (已搬遷)</title>
+  <title>ACB Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=https://phd-center.github.io/acb-calculator/">
   <link rel="canonical" href="https://phd-center.github.io/acb-calculator/">
   <style>
-    body { font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
-           background: #f8fafc; color: #334155; max-width: 600px; margin: 60px auto; padding: 24px;
-           text-align: center; line-height: 1.6; }
-    h1 { font-size: 18px; color: #0f172a; margin-bottom: 8px; }
-    .note { color: #64748b; font-size: 14px; }
-    a { color: #4f46e5; word-break: break-all; }
+    html, body { margin: 0; padding: 0; height: 100%; background: #ffffff; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .logo { max-width: min(80vw, 600px); max-height: 50vh; opacity: 0; animation: flash 1s ease-out forwards; }
+    @keyframes flash {
+      0%   { opacity: 0; transform: scale(0.98); }
+      40%  { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
-  <h1>頁面已搬遷</h1>
-  <p class="note">正在跳轉至新網址…</p>
-  <p>若未自動跳轉,請點:<br>
-    <a id="link" href="https://phd-center.github.io/acb-calculator/">https://phd-center.github.io/acb-calculator/</a>
-  </p>
+  <img class="logo" src="phdc-logo.png" alt="Population Health Data Center NCKU">
   <script>
-    // Preserve query string & hash on redirect (e.g. ?lang=en, #section)
+    // Keep query string & hash on redirect (e.g. ?lang=en, #section)
     var target = 'https://phd-center.github.io/acb-calculator/' + (location.search || '') + (location.hash || '');
-    document.getElementById('link').href = target;
-    location.replace(target);
+    setTimeout(function() { location.replace(target); }, 1100);
   </script>
 </body>
 </html>
